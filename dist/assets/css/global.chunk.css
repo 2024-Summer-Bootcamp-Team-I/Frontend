@@ -546,17 +546,8 @@ video {
 .w-screen {
   width: 100vw;
 }
-.w-\[480px\] {
-  width: 480px;
-}
 .bg-cover {
   background-size: cover;
-}
-.bg-auto {
-  background-size: auto;
-}
-.bg-center {
-  background-position: center;
 }
 .bg-bottom {
   background-position: bottom;
