@@ -4,6 +4,7 @@ import withSuspense from '@src/shared/hoc/withSuspense';
 import withErrorBoundary from '@src/shared/hoc/withErrorBoundary';
 import backGround from '@src/assets/img/bg_img.svg';
 import Navbar from '@src/components/Navbar';
+import SearchBar from '@root/src/components/SearchBar';
 
 const Newtab = () => {
   return (

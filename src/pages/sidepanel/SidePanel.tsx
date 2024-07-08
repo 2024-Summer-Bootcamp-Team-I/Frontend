@@ -11,7 +11,10 @@ const SidePanel = () => {
       style={{
         backgroundImage: `url(${bgSidePanel})`,
       }}
-    ></div>
+    >
+      <h1>My navernews sidepanel</h1>
+      <p>This side panel will display only on https://news.naver.com/</p>
+    </div>
   );
 };
 
