@@ -1,7 +1,11 @@
 import React from 'react';
 
 const ChannelRanking = () => {
-  return <div></div>;
+  return (
+    <div>
+      <p>ChannelRanking</p>
+    </div>
+  );
 };
 
 export default ChannelRanking;
