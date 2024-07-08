@@ -15,7 +15,7 @@ const manifest = {
 
   side_panel: {
     default_path: 'src/pages/sidepanel/index.html',
-    matches: ['https://www.youtube.com/watch?v=*'],
+    matches: ['https://news.naver.com/section/101'],
   },
   options_page: 'src/pages/options/index.html',
   background: {
@@ -34,14 +34,14 @@ const manifest = {
   },
   content_scripts: [
     {
-      matches: ['https://www.youtube.com/watch*'],
+      matches: ['https://news.naver.com/*'],
       js: ['src/pages/content/index.js'],
     },
   ],
   devtools_page: 'src/pages/devtools/index.html',
   web_accessible_resources: [
     {
-      resources: ['assets/js/*.js', 'assets/css/*.css', 'icon-128.png', 'icon-34.png'],
+      resources: ['assets/js/*.js', 'assets/css/*.css', 'icon-128.png', 'icon-34.png, assets/img/*.svg'],
       matches: ['*://*/*'],
     },
   ],

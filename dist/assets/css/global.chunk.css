@@ -540,6 +540,30 @@ video {
 .inline {
   display: inline;
 }
+.h-screen {
+  height: 100vh;
+}
+.w-screen {
+  width: 100vw;
+}
+.w-\[480px\] {
+  width: 480px;
+}
+.bg-cover {
+  background-size: cover;
+}
+.bg-auto {
+  background-size: auto;
+}
+.bg-center {
+  background-position: center;
+}
+.bg-bottom {
+  background-position: bottom;
+}
+.bg-no-repeat {
+  background-repeat: no-repeat;
+}
 .shadow {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);

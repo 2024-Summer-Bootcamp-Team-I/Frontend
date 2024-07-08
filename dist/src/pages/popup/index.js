@@ -7,10 +7,7 @@ const Popup = () => {
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", {})
   ] });
 };
-const Popup$1 = withErrorBoundary(
-  withSuspense(Popup, /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: " Loading ... " })),
-  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: " Error Occur " })
-);
+const Popup$1 = withErrorBoundary(withSuspense(Popup, /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: " Loading ... " })), /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: " Error Occur " }));
 addHmrIntoView("pages/popup");
 function init() {
   const appContainer = document.querySelector("#app-container");

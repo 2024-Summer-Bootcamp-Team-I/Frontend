@@ -1,13 +1,18 @@
-import React from "react";
-import "@src/global.css";
-import withSuspense from "@src/shared/hoc/withSuspense";
-import withErrorBoundary from "@src/shared/hoc/withErrorBoundary";
+import React from 'react';
+import '@src/global.css';
+import withSuspense from '@src/shared/hoc/withSuspense';
+import withErrorBoundary from '@src/shared/hoc/withErrorBoundary';
+import backGround from '@src/assets/img/bg_img.svg';
 
 const Newtab = () => {
-  return <div></div>;
+  return (
+    <div
+      className="w-screen h-screen bg-bottom bg-no-repeat bg-cover"
+      style={{
+        backgroundImage: `url(${backGround})`,
+      }}
+    ></div>
+  );
 };
 
-export default withErrorBoundary(
-  withSuspense(Newtab, <div> Loading ... </div>),
-  <div> Error Occur </div>
-);
+export default withErrorBoundary(withSuspense(Newtab, <div> Loading ... </div>), <div> Error Occur </div>);
