@@ -3,6 +3,7 @@ import '@src/global.css';
 import withSuspense from '@src/shared/hoc/withSuspense';
 import withErrorBoundary from '@src/shared/hoc/withErrorBoundary';
 import backGround from '@src/assets/img/bg_img.svg';
+import Navbar from '@src/components/Navbar';
 
 const Newtab = () => {
   return (
@@ -11,7 +12,9 @@ const Newtab = () => {
       style={{
         backgroundImage: `url(${backGround})`,
       }}
-    ></div>
+    >
+      <Navbar />
+    </div>
   );
 };
 
