@@ -1045,3 +1045,4 @@ var browserPolyfill = { exports: {} };
 })(browserPolyfill);
 addHmrIntoScript("pages/background");
 console.log("background loaded");
+chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }).catch((error) => console.error(error));
