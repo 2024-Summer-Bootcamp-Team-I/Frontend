@@ -4,6 +4,8 @@ import withSuspense from '@src/shared/hoc/withSuspense';
 import withErrorBoundary from '@src/shared/hoc/withErrorBoundary';
 import backGround from '@src/assets/img/bg_img.svg';
 import SearchBar from '@root/src/components/SearchBar';
+import ScrapBoard from '@root/src/components/ScrapBoard';
+import Scrap from '../sidepanel/Scrap';
 
 const Newtab = () => {
   return (
@@ -13,7 +15,7 @@ const Newtab = () => {
         backgroundImage: `url(${backGround})`,
       }}
     >
-      <SearchBar />
+      <Scrap />
     </div>
   );
 };
