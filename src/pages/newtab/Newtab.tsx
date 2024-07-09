@@ -14,9 +14,7 @@ const Newtab = () => {
       style={{
         backgroundImage: `url(${backGround})`,
       }}
-    >
-      <Scrap />
-    </div>
+    ></div>
   );
 };
 

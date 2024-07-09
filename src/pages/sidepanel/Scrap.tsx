@@ -6,12 +6,7 @@ import BlankBoard from '@root/src/components/BlankBoard';
 
 const Scrap = () => {
   return (
-    <div
-      className="justify-center w-[30rem] h-[100vh]"
-      style={{
-        backgroundImage: `url(${backGroundSide})`,
-      }}
-    >
+    <div className="justify-center w-[30rem] h-[100vh]">
       <div className="flex h-[7.25rem] items-center justify-between">
         <p className="mx-8 h-[3rem] text-[2rem]">LOGO</p>
         <div className="flex mx-4 items-center justify-center w-[14rem] h-[3rem] bg-[#113d66] text-white text-[1.25rem] rounded-full">
