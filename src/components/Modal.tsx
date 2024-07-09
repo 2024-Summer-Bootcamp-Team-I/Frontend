@@ -3,10 +3,10 @@ import xbutton from '@src/assets/img/xbutton.svg';
 
 const Modal = () => {
   return (
-    <div className="bg-white w-[13.38rem] h-[18.75rem] rounded-2xl ">
+    <div className="bg-white w-[13.375rem] h-[18.75rem] rounded-2xl ">
       <div className="flex justify-end pt-[0.5rem] pr-[0.5rem]">
         <button>
-          <img src={xbutton} alt="Xbutton" className="text-[#505050]" />
+          <img src={xbutton} alt="Xbutton" />
         </button>
       </div>
       <div className="flex justify-between items-center pl-[1.5rem]">
