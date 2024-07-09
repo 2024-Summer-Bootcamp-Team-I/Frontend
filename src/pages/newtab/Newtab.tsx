@@ -11,9 +11,8 @@ import ClassifiedNews from './ClassifiedNews';
 import ChannelRanking from './ChannelRanking';
 import MyNews from './MyNews';
 
-
 const Newtab = () => {
-  const [currentPage, setCurrentPage] = useState<'ClassifiedNews' | 'MyNews' | 'ChannelRanking'>('MyNews');
+  const [currentPage, setCurrentPage] = useState<'ClassifiedNews' | 'MyNews' | 'ChannelRanking'>('ClassifiedNews');
   return (
     <div
       className="w-screen h-screen bg-bottom bg-no-repeat bg-cover"
