@@ -15,7 +15,7 @@ const ClassifiedNews = () => {
           <CardNews />
           <CardNews />
         </div>
-        <div className="flex justify-center w-[15rem] h-[2rem] bg-red-500 mt-8 3xl:mt-10" />
+        <div className="flex justify-center w-[15rem] h-[2rem] bg-red-500 mt-8 3xl:mt-10 4xl:mt-16" />
       </div>
     </div>
   );
