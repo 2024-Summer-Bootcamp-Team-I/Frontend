@@ -1,6 +1,5 @@
 import React from 'react';
 import logo from '@root/src/assets/img/logo.png';
-import usernameicon from '@root/src/assets/img/usernameicon.svg';
 import emailicon from '@root/src/assets/img/emailicon.svg';
 import passwordicon from '@root/src/assets/img/passwordicon.svg';
 
