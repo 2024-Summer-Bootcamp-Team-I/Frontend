@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '@src/global.css';
 import withSuspense from '@src/shared/hoc/withSuspense';
 import withErrorBoundary from '@src/shared/hoc/withErrorBoundary';
@@ -10,6 +10,13 @@ import MyNews from './MyNews';
 
 const Newtab = () => {
   const [currentPage, setCurrentPage] = useState<'ClassifiedNews' | 'MyNews' | 'ChannelRanking'>('ClassifiedNews');
+
+  useEffect(() => {
+    const savedPage = localStorage.getItem('currentPage');
+    if (savedPage) {
+      setCurrentPage(savedPage as 'ClassifiedNews' | 'MyNews' | 'ChannelRanking');
+    }
+  }, []);
 
   return (
     <div
