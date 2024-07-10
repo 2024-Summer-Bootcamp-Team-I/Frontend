@@ -1,8 +1,6 @@
 import React from 'react';
-import articleEx from '@src/assets/img/article2.svg';
 import tvIcon from '@src/assets/img/TV.svg';
 import calendarIcon from '@assets/img/Calendar.svg';
-import percentEx from '@assets/img/percentEx.svg';
 import LiquidFillGauge from './LiquidFillGauge';
 
 const CardNews = () => {
