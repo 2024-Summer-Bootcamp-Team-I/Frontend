@@ -8,7 +8,7 @@ type NavbarProps = {
 
 const Navbar = ({ currentPage, onClick }: NavbarProps) => {
   return (
-    <div className="flex justify-between py-[2.25rem]">
+    <div className="flex justify-between pt-[2.25rem]">
       <div className="flex text-2xl place-items-center">
         <img src={logo} alt="Logo" className="px-[3rem]" />
         <div className="flex space-x-[0.125rem]">
