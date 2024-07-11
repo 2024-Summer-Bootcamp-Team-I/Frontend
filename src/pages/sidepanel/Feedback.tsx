@@ -2,10 +2,8 @@ import React from 'react';
 import line from '@src/assets/img/Line1.svg';
 import FeedbackIcon from '@src/assets/img/FeedbackIcon.svg';
 import ShortcutIcon from '@src/assets/img/ShortcutsIcon.svg';
-import LiquidFillGauge from '@root/src/components/LiquidFillGauge';
-import TruestScoreInfo from '@root/src/components/TruestScoreInfo';
-import LeftStar from '@src/components/LeftStar';
 import RatingStars from '@src/components/RatingStars';
+import TrustScore from '@root/src/components/TrustScore';
 
 const Feedback = () => {
   const handleRatingChange = (rating: number) => {
@@ -33,19 +31,7 @@ const Feedback = () => {
       <div className="px-8 pt-[1.25rem]">
         <img src={line} />
       </div>
-      <div className="flex-col w-[26rem] h-[18rem] bg-white rounded-[2.5rem] m-8 shadow-lg">
-        <p className="px-[2.5rem] py-8 text-2xl underline underline-offset-8 text-[#106AAB] font-semibold">판별 점수</p>
-        <div className="flex justify-between mx-[2.5rem]">
-          <div className="w-[10rem] h-[10rem]">
-            <LiquidFillGauge elementId="gauge1" value={25} />
-          </div>
-
-          <div className="flex flex-col">
-            <p className="text-base text-[#505050] pb-[0.75rem] leading-5">판별 점수 단위 (%)</p>
-            <TruestScoreInfo />
-          </div>
-        </div>
-      </div>
+      <div className="m-8"></div>
       <div className="w-[26rem] h-[12.75rem] bg-white rounded-[2.5rem] m-8 shadow-lg">
         <div className="py-8">
           <RatingStars totalStars={5} onRatingChange={handleRatingChange} />

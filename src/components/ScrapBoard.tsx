@@ -15,11 +15,11 @@ const ScrapBoard = () => {
         <div className="flex items-end justify-end m-1">
           <div className="flex items-center ml-5">
             <img src={tvIcon} className="w-[0.75rem] h-[0.75rem]" />
-            <span className="ml-2 text-[0.75rem]">한국일보</span>
+            <span className="ml-2 text-[0.75rem] text-[#505050]">한국일보</span>
           </div>
           <div className="flex items-center ml-5">
             <img src={calendarIcon} className="w-[0.75rem] h-[0.75rem]" />
-            <span className="ml-2 text-[0.75rem]">2024.07.03</span>
+            <span className="ml-2 text-[0.75rem] text-[#505050]">2024.07.03</span>
           </div>
         </div>
       </div>
