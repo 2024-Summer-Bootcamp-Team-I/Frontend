@@ -30,7 +30,7 @@ interface GaugeSettings {
 
 // LiquidFillGaugeProps 인터페이스 정의
 interface LiquidFillGaugeProps {
-  elementId: string;
+  elementId: number;
   value: number;
   config?: GaugeSettings;
 }
@@ -72,7 +72,7 @@ const LiquidFillGauge: React.FC<LiquidFillGaugeProps> = ({ elementId, value, con
     }
   }, [value, settings]);
 
-  return <svg id={elementId} ref={gaugeRef} className="w-full h-full" />;
+  return <svg id={elementId.toString()} ref={gaugeRef} className="w-full h-full" />;
 };
 
 // 게이지 로드 함수
