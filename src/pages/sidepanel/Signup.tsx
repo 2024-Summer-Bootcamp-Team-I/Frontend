@@ -5,6 +5,8 @@ import emailicon from '@root/src/assets/img/emailicon.svg';
 import passwordicon from '@root/src/assets/img/passwordicon.svg';
 
 const Signup = () => {
+  const data = ['가입되지 않은 이메일입니다.', '비밀번호가 일치하지 않습니다.', '이메일 양식이 잘못되었습니다.'];
+
   return (
     <div className="flex flex-col items-center">
       <img src={logo} alt="Logo" className="w-[5rem] h-[1.5rem] mb-[5.5rem]" />
