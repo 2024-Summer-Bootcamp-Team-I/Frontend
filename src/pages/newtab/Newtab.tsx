@@ -10,7 +10,8 @@ import Navbar from '@src/components/Navbar';
 import ClassifiedNews from './ClassifiedNews';
 import ChannelRanking from './ChannelRanking';
 import MyNews from './MyNews';
-
+import Carousel from '@src/components/Carousel';
+import Test from '@root/src/components/Test';
 
 const Newtab = () => {
   const [currentPage, setCurrentPage] = useState<'ClassifiedNews' | 'MyNews' | 'ChannelRanking'>('MyNews');
@@ -27,6 +28,7 @@ const Newtab = () => {
           {currentPage === 'ClassifiedNews' && <ClassifiedNews />}
           {currentPage === 'MyNews' && <MyNews />}
           {currentPage === 'ChannelRanking' && <ChannelRanking />}
+          <Test />
         </div>
       </div>
     </div>

@@ -27,10 +27,14 @@
   "dependencies": {
     "axios": "^1.6.5",
     "construct-style-sheets-polyfill": "3.1.0",
+    "embla-carousel": "^8.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-modal": "^3.16.1",
     "react-query": "^3.39.3",
+    "react-slick": "^0.30.2",
+    "slick-carousel": "^1.8.1",
+    "swiper": "^11.1.4",
     "webextension-polyfill": "0.10.0",
     "zustand": "^4.5.4"
   },
@@ -83,7 +87,7 @@
       "prettier --write",
       "eslint --fix"
     ]
-  }, 
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
