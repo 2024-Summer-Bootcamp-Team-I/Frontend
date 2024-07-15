@@ -7,8 +7,6 @@ import Navbar from '@src/components/Navbar';
 import ClassifiedNews from './ClassifiedNews';
 import ChannelRanking from './ChannelRanking';
 import MyNews from './MyNews';
-import Carousel from '@src/components/Carousel';
-import Test from '@root/src/components/Test';
 import MainText from './MainText';
 
 //더미 데이터
@@ -119,7 +117,6 @@ const Newtab: React.FC = () => {
         backgroundImage: `url(${backGround})`,
       }}
     >
-      
       <Navbar currentPage={currentPage} onClick={handleNavbarClick} />
       <div className="flex items-center justify-center flex-grow">
         {selectedArticle ? (
