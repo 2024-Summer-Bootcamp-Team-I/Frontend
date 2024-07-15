@@ -3,7 +3,6 @@ import React from 'react';
 import tvIcon from '@src/assets/img/TV.svg';
 import calendarIcon from '@assets/img/Calendar.svg';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import AverageRating from '@root/src/components/AverageRating';
 
 type MainTextProps = {
   article: Article;
@@ -11,8 +10,7 @@ type MainTextProps = {
   getDiscriminant: (newsId: number) => Discriminant | undefined;
 };
 
-const MainText: React.FC<MainTextProps> = ({ article, getChannelName, getDiscriminant }) => {
-  const averageRating = 4.2; // 예제 평균 별점 값
+const MainTextC: React.FC<MainTextProps> = ({ article, getChannelName, getDiscriminant }) => {
   const discriminant = getDiscriminant(article.id);
 
   return (
@@ -36,10 +34,7 @@ const MainText: React.FC<MainTextProps> = ({ article, getChannelName, getDiscrim
       </div>
       <div className="flex flex-col space-y-[2rem] 4xl:space-y-[4rem]">
         <TrustScore newsId={discriminant.newsId} score={discriminant.score} />
-        <div className="w-[26rem] h-[6.25rem] rounded-[2.5rem] bg-white">
-          <AverageRating rating={averageRating} /> {/* 평균 별점 표시 */}
-        </div>
-        <div className="w-[26rem] h-[11.75rem] 3xl:h-[19.75rem] 4xl:h-[32.75rem] rounded-[2.5rem] bg-white pl-10 py-8">
+        <div className="w-[26rem] h-[20rem] 3xl:h-[28rem] 4xl:h-[43rem] rounded-[2.5rem] bg-white pl-10 py-8">
           <PerfectScrollbar className="w-full h-full">
             <p className="text-2xl underline underline-offset-8 text-[#106AAB] font-semibold pb-8">판단 근거 요약</p>
             <p className="pr-10 text-base">{discriminant.reason}</p>
@@ -50,4 +45,4 @@ const MainText: React.FC<MainTextProps> = ({ article, getChannelName, getDiscrim
   );
 };
 
-export default MainText;
+export default MainTextC;

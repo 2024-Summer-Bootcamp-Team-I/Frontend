@@ -6,7 +6,6 @@ import bgSidePanel from '@src/assets/img/bg_sidepannel.svg';
 import Scrap from './Scrap';
 import Signup from './Signup';
 import Login from './Login';
-import Feedback from './Feedback';
 import Modal from '@src/components/Modal';
 
 const SidePanel = () => {
@@ -30,7 +29,6 @@ const SidePanel = () => {
       }}
     >
       <div className="flex flex-col items-center justify-center">
-        {/* <Feedback /> */}
         <Login />
         <button onClick={openModal} className="text-[3rem]">
           모달 열기
