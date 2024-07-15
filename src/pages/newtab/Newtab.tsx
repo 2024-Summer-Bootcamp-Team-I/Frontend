@@ -7,7 +7,7 @@ import Navbar from '@src/components/Navbar';
 import ClassifiedNews from './ClassifiedNews';
 import ChannelRanking from './ChannelRanking';
 import MyNews from './MyNews';
-import MainText from './MainText';
+import MainTextC from './MainTextC';
 
 //더미 데이터
 const channels: ChannelName[] = [
@@ -120,7 +120,7 @@ const Newtab: React.FC = () => {
       <Navbar currentPage={currentPage} onClick={handleNavbarClick} />
       <div className="flex items-center justify-center flex-grow">
         {selectedArticle ? (
-          <MainText article={selectedArticle} getChannelName={getChannelName} getDiscriminant={getDiscriminant} />
+          <MainTextC article={selectedArticle} getChannelName={getChannelName} getDiscriminant={getDiscriminant} />
         ) : (
           <>
             {currentPage === 'ClassifiedNews' && (
