@@ -1,32 +1,47 @@
 import React from 'react';
-import articleEx from '@src/assets/img/article2.svg';
 import tvIcon from '@src/assets/img/TV.svg';
 import calendarIcon from '@assets/img/Calendar.svg';
-import percentEx from '@assets/img/percentEx.svg';
+import LiquidFillGauge from './LiquidFillGauge';
 
-const CardNews = () => {
+type CardNewsProps = {
+  article: Article;
+  onClick: (article: Article) => void;
+  getChannelName: (channelId: number) => string;
+  getDiscriminant: (newsId: number) => Discriminant | undefined;
+};
+
+const CardNews: React.FC<CardNewsProps> = ({ article, onClick, getChannelName, getDiscriminant }) => {
+  const config = {
+    waveAnimate: false,
+    waveRise: false,
+    valueCountUp: false,
+  };
+
+  const discriminant = getDiscriminant(article.id);
+
   return (
-    <div className="w-[25rem] h-[14rem] bg-white rounded-[1.875rem] shadow-md">
-      <div className="w-[25rem] h-[7.5rem]">
-        <img src={articleEx} />
-      </div>
-      <div className="flex">
-        <div className="flex flex-col m-5 w-[17.25rem] h-[4.375rem] ">
-          <p className="flex-1 items-start text-[1rem] font-semibold">
-            [뉴스줌인]라인야후, 탈네이버 본격화... 글로벌 사업 '분수령'
-          </p>
+    <div
+      onClick={() => onClick(article)}
+      className="w-[26rem] 3xl:w-[35rem] 4xl:w-[47.375rem] h-[11.5rem] 3xl:h-[12rem] 4xl:h-[16rem] bg-white rounded-[1.875rem] shadow-md cursor-pointer"
+    >
+      <div className="w-[26rem] 3xl:w-[35rem] 4xl:w-[47.375rem] h-[4.625rem] 3xl:h-[5.125rem] 4xl:h-[9.125rem] bg-gray-500 rounded-ss-[1.875rem] rounded-se-[1.875rem]" />
+      <div className="flex items-center justify-between">
+        <div className="flex flex-col m-5 w-[18.25rem] 3xl:w-[27.25rem] 4xl:w-[39.625rem] h-[4.375rem] ">
+          <p className="flex-1 items-start text-[1rem] font-semibold">{article.title}</p>
           <div className="flex items-end justify-end">
             <div className="flex items-center ml-5">
               <img src={tvIcon} className="w-[0.75rem] h-[0.75rem]" />
-              <span className="ml-2 text-[0.75rem]">한국일보</span>
+              <span className="ml-2 text-[0.75rem] text-[#505050]">{getChannelName(article.channelId)}</span>
             </div>
             <div className="flex items-center ml-5">
               <img src={calendarIcon} className="w-[0.75rem] h-[0.75rem]" />
-              <span className="ml-2 text-[0.75rem]">2024.07.03</span>
+              <span className="ml-2 text-[0.75rem] text-[#505050]">{article.publishDate}</span>
             </div>
           </div>
         </div>
-        <img className="m-5 ml-0 w-[4rem] h-[4rem]" src={percentEx} />
+        <div className="m-5 ml-0 w-[4rem] h-[4rem]">
+          <LiquidFillGauge elementId={discriminant.newsId} value={discriminant.score} />
+        </div>
       </div>
     </div>
   );

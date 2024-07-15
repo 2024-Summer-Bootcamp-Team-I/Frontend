@@ -6,6 +6,7 @@ import bgSidePanel from '@src/assets/img/bg_sidepannel.svg';
 import Scrap from './Scrap';
 import Signup from './Signup';
 import Login from './Login';
+import Feedback from './Feedback';
 
 const SidePanel = () => {
   return (
@@ -15,8 +16,8 @@ const SidePanel = () => {
         backgroundImage: `url(${bgSidePanel})`,
       }}
     >
-      <div className="flex items-center">
-        <Login />
+      <div className="flex items-center justify-center">
+        <Feedback />
       </div>
     </div>
   );
