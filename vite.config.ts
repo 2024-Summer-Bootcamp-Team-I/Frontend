@@ -2,10 +2,13 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path, { resolve } from 'path';
+import dotenv from 'dotenv';
 import makeManifest from './utils/plugins/make-manifest';
 import customDynamicImport from './utils/plugins/custom-dynamic-import';
 import addHmr from './utils/plugins/add-hmr';
 import watchRebuild from './utils/plugins/watch-rebuild';
+
+dotenv.config();
 
 const rootDir = resolve(__dirname);
 const srcDir = resolve(rootDir, 'src');
@@ -14,7 +17,7 @@ const assetsDir = resolve(srcDir, 'assets');
 const outDir = resolve(rootDir, 'dist');
 const publicDir = resolve(rootDir, 'public');
 
-const isDev = process.env.__DEV__ === 'true';
+const isDev = process.env.NODE_ENV === 'development';
 const isProduction = !isDev;
 
 // ENABLE HMR IN BACKGROUND SCRIPT
@@ -65,7 +68,7 @@ export default defineConfig({
       output: {
         entryFileNames: 'src/pages/[name]/index.js',
         chunkFileNames: isDev ? 'assets/js/[name].js' : 'assets/js/[name].[hash].js',
-        assetFileNames: assetInfo => {
+        assetFileNames: (assetInfo) => {
           const { name } = path.parse(assetInfo.name);
           const assetFileName = name === 'contentStyle' ? `${name}${getCacheInvalidationKey()}` : name;
           return `assets/[ext]/${assetFileName}.chunk.[ext]`;
