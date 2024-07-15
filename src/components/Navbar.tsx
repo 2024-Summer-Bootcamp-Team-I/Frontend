@@ -3,12 +3,12 @@ import logo from '@root/src/assets/img/logo.png';
 import SearchBar from './SearchBar';
 
 type NavbarProps = {
-  currentPage: 'ClassifiedNews' | 'MyNews' | 'ChannelRanking';
-  onClick: (page: 'ClassifiedNews' | 'MyNews' | 'ChannelRanking') => void;
+  currentPage: 'RelatedNews' | 'MyNews' | 'ServiceInfo';
+  onClick: (page: 'RelatedNews' | 'MyNews' | 'ServiceInfo') => void;
 };
 
 const Navbar = ({ currentPage, onClick }: NavbarProps) => {
-  const handleButtonClick = (page: 'ClassifiedNews' | 'MyNews' | 'ChannelRanking') => {
+  const handleButtonClick = (page: 'RelatedNews' | 'MyNews' | 'ServiceInfo') => {
     if (currentPage === page) {
       window.location.reload();
     } else {
@@ -23,10 +23,10 @@ const Navbar = ({ currentPage, onClick }: NavbarProps) => {
         <img src={logo} alt="Logo" className="px-[3rem]" />
         <div className="flex space-x-[0.125rem]">
           <button
-            className={`w-[10rem] h-[3rem] text-center rounded-full content-center ${currentPage === 'ClassifiedNews' ? 'bg-midnight text-white shadow-inner' : ''}`}
-            onClick={() => handleButtonClick('ClassifiedNews')}
+            className={`w-[10rem] h-[3rem] text-center rounded-full content-center ${currentPage === 'RelatedNews' ? 'bg-midnight text-white shadow-inner' : ''}`}
+            onClick={() => handleButtonClick('RelatedNews')}
           >
-            검증된 기사
+            판별된 기사
           </button>
           <button
             className={`w-[10rem] h-[3rem] text-center rounded-full content-center ${currentPage === 'MyNews' ? 'bg-midnight text-white shadow-inner' : ''}`}
@@ -35,10 +35,10 @@ const Navbar = ({ currentPage, onClick }: NavbarProps) => {
             나의 기사
           </button>
           <button
-            className={`w-[10rem] h-[3rem] text-center rounded-full content-center ${currentPage === 'ChannelRanking' ? 'bg-midnight text-white shadow-inner' : ''}`}
-            onClick={() => handleButtonClick('ChannelRanking')}
+            className={`w-[10rem] h-[3rem] text-center rounded-full content-center ${currentPage === 'ServiceInfo' ? 'bg-midnight text-white shadow-inner' : ''}`}
+            onClick={() => handleButtonClick('ServiceInfo')}
           >
-            언론사 랭크
+            서비스 정보
           </button>
         </div>
       </div>
