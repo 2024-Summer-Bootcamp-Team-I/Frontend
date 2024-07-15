@@ -2,3 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 @import 'react-perfect-scrollbar/dist/css/styles.css';
+
+.wave-path {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 2;
+}
