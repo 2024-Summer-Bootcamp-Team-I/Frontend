@@ -4,10 +4,10 @@ import withSuspense from '@src/shared/hoc/withSuspense';
 import withErrorBoundary from '@src/shared/hoc/withErrorBoundary';
 import backGround from '@src/assets/img/bg_img.svg';
 import Navbar from '@src/components/Navbar';
-import ClassifiedNews from './ClassifiedNews';
-import ChannelRanking from './ChannelRanking';
+import RelatedNews from './RelatedNews';
+import ServiceInfo from './ServiceInfo';
 import MyNews from './MyNews';
-import MainText from './MainText';
+import MainTextC from './MainTextC';
 
 //더미 데이터
 const channels: ChannelName[] = [
@@ -87,13 +87,13 @@ const getDiscriminant = (newsId: number): Discriminant | undefined => {
 };
 
 const Newtab: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState<'ClassifiedNews' | 'MyNews' | 'ChannelRanking'>('ClassifiedNews');
+  const [currentPage, setCurrentPage] = useState<'RelatedNews' | 'MyNews' | 'ServiceInfo'>('RelatedNews');
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
 
   useEffect(() => {
     const savedPage = localStorage.getItem('currentPage');
-    if (savedPage && ['ClassifiedNews', 'MyNews', 'ChannelRanking'].includes(savedPage)) {
-      setCurrentPage(savedPage as 'ClassifiedNews' | 'MyNews' | 'ChannelRanking');
+    if (savedPage && ['RelatedNews', 'MyNews', 'ServiceInfo'].includes(savedPage)) {
+      setCurrentPage(savedPage as 'RelatedNews' | 'MyNews' | 'ServiceInfo');
     }
   }, []);
 
@@ -101,7 +101,7 @@ const Newtab: React.FC = () => {
     localStorage.setItem('currentPage', currentPage);
   }, [currentPage]);
 
-  const handleNavbarClick = (page: 'ClassifiedNews' | 'MyNews' | 'ChannelRanking') => {
+  const handleNavbarClick = (page: 'RelatedNews' | 'MyNews' | 'ServiceInfo') => {
     setSelectedArticle(null); // 페이지 전환 시 기사 선택 해제
     setCurrentPage(page);
   };
@@ -120,11 +120,11 @@ const Newtab: React.FC = () => {
       <Navbar currentPage={currentPage} onClick={handleNavbarClick} />
       <div className="flex items-center justify-center flex-grow">
         {selectedArticle ? (
-          <MainText article={selectedArticle} getChannelName={getChannelName} getDiscriminant={getDiscriminant} />
+          <MainTextC article={selectedArticle} getChannelName={getChannelName} getDiscriminant={getDiscriminant} />
         ) : (
           <>
-            {currentPage === 'ClassifiedNews' && (
-              <ClassifiedNews
+            {currentPage === 'RelatedNews' && (
+              <RelatedNews
                 articles={articles}
                 onArticleClick={handleArticleClick}
                 getChannelName={getChannelName}
@@ -132,7 +132,7 @@ const Newtab: React.FC = () => {
               />
             )}
             {currentPage === 'MyNews' && <MyNews />}
-            {currentPage === 'ChannelRanking' && <ChannelRanking />}
+            {currentPage === 'ServiceInfo' && <ServiceInfo />}
           </>
         )}
       </div>
