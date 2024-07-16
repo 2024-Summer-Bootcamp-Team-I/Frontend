@@ -1,7 +1,6 @@
 // src/WaveGraph.js
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
-import polygon from '@assets/img/Polygon5.svg';
 
 const WaveGraph = ({ data }) => {
   // 파란 그래프와 하얀 그래프의 높이 차가 점수에 따라 달라지게 구현
@@ -16,7 +15,7 @@ const WaveGraph = ({ data }) => {
   useEffect(() => {
     const svg = d3
       .select(svgRef.current)
-      .attr('viewBox', '0 0 1000 584') // 차트 영역 크기 설정
+      .attr('viewBox', '0 0 1392 640') // 차트 영역 크기 설정
       .classed('w-full h-full', true);
 
     // 날짜 파서 설정
@@ -34,9 +33,9 @@ const WaveGraph = ({ data }) => {
       // .domain([0, data.length - 1])
       .scaleTime()
       .domain(d3.extent(data, (d) => d.date))
-      .range([0, 1000]);
+      .range([0, 1392]);
 
-    const y = d3.scaleLinear().domain([0, 110]).range([584, 0]); // 이 부분을 조절하면 위쪽에 여백을 남길 수 있음(신뢰도가 100일때 부자연스럽게 위에 닿는 것 방지)
+    const y = d3.scaleLinear().domain([0, 110]).range([640, 0]); // 이 부분을 조절하면 위쪽에 여백을 남길 수 있음(신뢰도가 100일때 부자연스럽게 위에 닿는 것 방지)
     // 물론 range값이 축에도 영향을 주니 주의
 
     // const xAxis = d3.axisBottom(x).ticks(data.length);
@@ -100,22 +99,22 @@ const WaveGraph = ({ data }) => {
     const area = d3
       .area()
       .x((d) => x(d.date))
-      .y0(584)
+      .y0(640)
       .y1((d) => y(d.value))
       .curve(d3.curveNatural);
 
     const whiteinitialArea = d3
       .area()
       .x((d) => x(d.date))
-      .y0(544)
-      .y1(584)
+      .y0(600)
+      .y1(640)
       .curve(d3.curveNatural);
 
     const blueinitialArea = d3
       .area()
       .x((d) => x(d.date))
-      .y0(584)
-      .y1(584)
+      .y0(640)
+      .y1(640)
       .curve(d3.curveNatural);
 
     // 하얀그래프
@@ -145,8 +144,8 @@ const WaveGraph = ({ data }) => {
         .append('line')
         .attr('x1', xCoord)
         .attr('x2', xCoord)
-        .attr('y1', 584) // 초기에는 y1과 y2를 모두 하단에 설정. 애니메이션 넣기 전에는 여기도 yCoor였음
-        .attr('y2', 584) // 차트의 하단 y좌표
+        .attr('y1', 640) // 초기에는 y1과 y2를 모두 하단에 설정. 애니메이션 넣기 전에는 여기도 yCoor였음
+        .attr('y2', 640) // 차트의 하단 y좌표
         .attr('stroke', '#ffffff')
         .attr('stroke-width', 1)
         .attr('stroke-dasharray', '5,5')
@@ -182,15 +181,14 @@ const WaveGraph = ({ data }) => {
   }, [data]);
 
   return (
-    <div className="flex flex-col items-center mt-[10rem]">
-      <img src={polygon} className="h-6"></img>
+    <div className="flex flex-col items-center justify-center">
       <div className="flex">
         <svg ref={yAxisRef} className="w-10"></svg>
         <div className="flex flex-col">
-          <div className="w-[62.5rem] h-[36.5rem] bg-[#fff0d5] rounded-[2.5rem]">
+          <div className="w-[87rem] h-[40rem] bg-[#fff0d5] rounded-[2.5rem]">
             <svg ref={svgRef} className="rounded-[2.5rem]"></svg>
           </div>
-          <svg ref={xAxisRef} className="h-10 w-[62.5rem]"></svg>
+          <svg ref={xAxisRef} className="h-10 w-[87rem]"></svg>
         </div>
       </div>
     </div>

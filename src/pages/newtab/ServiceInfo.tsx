@@ -1,7 +1,7 @@
 import React from 'react';
 import WaveGraph from '@root/src/components/WaveGraph';
 
-const ChannelRanking = () => {
+const ServiceInfo = () => {
   // const data = [30, 50, 59, 68, 48, 53, 82, 75];
   const data = [
     { date: '2024-06-30', value: 56 },
@@ -16,12 +16,12 @@ const ChannelRanking = () => {
   ];
 
   return (
-    <div className="flex justify-center mt-6">
-      <div className="  w-[75rem] h-[50rem] bg-white bg-opacity-10 rounded-[3.125rem]">
+    <div className="flex justify-center">
+      <div className="flex flex-col items-center justify-center w-full h-full bg-white bg-opacity-10 rounded-[3.125rem] pl-8 pr-16 pb-4 pt-12 mx-[3rem]">
         <WaveGraph data={data} />
       </div>
     </div>
   );
 };
 
-export default ChannelRanking;
+export default ServiceInfo;
