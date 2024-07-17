@@ -8,7 +8,7 @@ import Signup from './Signup';
 import Login from './Login';
 import Modal from '@src/components/Modal';
 
-const SidePanel = () => {
+const SidePanel: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => setShowModal(true);

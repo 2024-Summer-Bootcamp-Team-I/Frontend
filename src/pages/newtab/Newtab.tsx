@@ -87,7 +87,7 @@ const getDiscriminant = (newsId: number): Discriminant | undefined => {
 };
 
 const Newtab: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState<'RelatedNews' | 'MyNews' | 'ServiceInfo'>('RelatedNews');
+  const [currentPage, setCurrentPage] = useState<'RelatedNews' | 'MyNews' | 'ServiceInfo'>('MyNews');
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
 
   useEffect(() => {
