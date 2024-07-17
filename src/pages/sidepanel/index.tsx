@@ -6,30 +6,35 @@ import SidePanel from '@pages/sidepanel/SidePanel';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import queryClient from '@src/queryClient';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 refreshOnUpdate('pages/sidepanel');
 
-function App() {
+const App = () => {
   useEffect(() => {
+    console.log('SidePanel loaded');
+
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       const tab = tabs[0];
       const isNaverNews =
-        tab.url?.startsWith('https://news.naver.com/section/105') ||
+        tab.url?.startsWith('https://news.naver.com/section/') ||
         tab.url?.startsWith('https://n.news.naver.com/mnews/article/');
       if (!isNaverNews) {
         window.close(); // Close the side panel if not on allowed Naver News pages
       }
     });
-
-    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-      if (message.action === 'closeSidePanel') {
-        window.close();
-      }
-    });
   }, []);
 
-  return <SidePanel />;
-}
+  return (
+    <QueryClientProvider client={queryClient}>
+      <DndProvider backend={HTML5Backend}>
+        <SidePanel />
+      </DndProvider>
+      <ReactQueryDevtools initialIsOpen={true} />
+    </QueryClientProvider>
+  );
+};
 
 function init() {
   const appContainer = document.querySelector('#app-container');
@@ -37,12 +42,7 @@ function init() {
     throw new Error('Can not find #app-container');
   }
   const root = createRoot(appContainer);
-  root.render(
-    <QueryClientProvider client={queryClient}>
-      <App />
-      <ReactQueryDevtools initialIsOpen={true} />
-    </QueryClientProvider>,
-  );
+  root.render(<App />);
 }
 
 init();

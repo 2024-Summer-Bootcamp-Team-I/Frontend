@@ -7,7 +7,7 @@ import Scrap from './Scrap';
 import Signup from './Signup';
 import Login from './Login';
 
-const SidePanel = () => {
+const SidePanel: React.FC = () => {
   return (
     <div
       className="flex justify-center w-screen h-screen bg-bottom bg-no-repeat bg-cover"
