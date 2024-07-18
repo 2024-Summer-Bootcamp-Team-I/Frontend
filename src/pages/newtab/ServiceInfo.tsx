@@ -16,9 +16,11 @@ const ServiceInfo = () => {
   ];
 
   return (
-    <div className="flex justify-center">
-      <div className="flex flex-col items-center justify-center w-full h-full bg-white bg-opacity-10 rounded-[3.125rem] pl-8 pr-16 pb-4 pt-12 mx-[3rem]">
-        <WaveGraph data={data} />
+    <div className="flex justify-center items-center">
+      <div className="flex items-center justify-center bg-white bg-opacity-10 rounded-[3.125rem] w-[85rem] h-[40rem] 3xl:w-[95rem] 3xl:h-[45rem] 4xl:w-[150rem] 4xl:h-[70rem] pl-[5rem] pr-32 pb-12 pt-24 ">
+        <div className="scale-[0.85] 3xl:scale-[1] 4xl:scale-[1.55]">
+          <WaveGraph data={data} />
+        </div>
       </div>
     </div>
   );
