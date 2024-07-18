@@ -22,24 +22,6 @@ const Carousel: React.FC = () => {
     };
   }, []);
 
-  // 마우스 휠 이벤트
-  useEffect(() => {
-    const handleWheel = (e) => {
-      e.preventDefault();
-      if (swiperRef.current && swiperRef.current.swiper) {
-        const swiper = swiperRef.current.swiper;
-        swiper.mousewheel.enable();
-        swiper.mousewheel.handle(e);
-      }
-    };
-
-    window.addEventListener('wheel', handleWheel, { passive: false });
-
-    return () => {
-      window.removeEventListener('wheel', handleWheel);
-    };
-  }, []);
-
   // 슬라이드 데이터 설정
   const newsData = Array.from({ length: 10 }, (_, index) => ({ id: index + 1 }));
 
