@@ -1,11 +1,26 @@
 import React, { useState } from 'react';
+import { useMutation, UseMutationResult } from '@tanstack/react-query';
 import logo from '@root/src/assets/img/logo.png';
 import emailicon from '@root/src/assets/img/emailicon.svg';
 import passwordicon from '@root/src/assets/img/passwordicon.svg';
-import axios from 'axios';
+import axios, { Axios, AxiosError, AxiosResponse } from 'axios';
 import Modal from '@root/src/components/Modal';
 
-const Login = () => {
+interface LoginProps {
+  email: string;
+  password: string;
+}
+
+interface LoginResponse {
+  message: string;
+}
+
+const login = async ({ email, password }: LoginProps): Promise<LoginResponse> => {
+  const response = await axios.post('http://localhost:8000/api/v1/accounts/login', { email, password });
+  return response.data;
+};
+
+const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showModal, setShowModal] = useState(false);
@@ -16,34 +31,62 @@ const Login = () => {
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
 
-  const fetchPost = async () => {
-    try {
-      //에러 해당x 정상적으로 동작하는 코드들
-      const response = await axios.post('http://localhost:8000/api/v1/accounts/login', { email, password });
-      console.log(response.data);
+  // const mutation: UseMutationResult<LoginResponse, AxiosError, LoginProps> = useMutation<LoginResponse, AxiosError, LoginProps>({
+  const mutation = useMutation<LoginResponse, AxiosError, LoginProps>({
+    mutationFn: login,
+    onSuccess: (data) => {
+      console.log(data);
+      // 성공 시 동작 추가
+    },
+    onError: (error: AxiosError<LoginResponse>) => {
+      const errorMessage = error.response?.data?.message;
+      // errorMessage = JSON.parse(errorMessage)
+      // const errorMessage = JSON.stringify(error.response.data.message); //이것만 해도 되는거 아닌가?
+      // const errorMessage = error.response?.data ? JSON.stringify(error.response.data.message) : error.message;
 
-      // 스크랩 사이드패널로 이동하는 코드 작성
-    } catch (error) {
-      setErrorMessage(error.response.data.message);
+      // setErrorMessage(error.response.data.message || '로그인 요청 중 문제가 발생했습니다.');
+      // let errorMessage = '로그인 요청 중 문제가 발생했습니다.';
+      // if (error.response?.data?.message) {
+      //   errorMessage = error.response.data.message;
+      // }
+      setErrorMessage(errorMessage);
       openModal();
-      console.log('Error', error.response.data.message);
-    }
-  };
+      console.log(error);
+      // console.log('Error', error.response?.data?.message || error.message);
+    },
+  });
+  // 기존 방식
+  // const fetchPost = async () => {
+  //   try {
+  //     //에러 해당x 정상적으로 동작하는 코드들
+  //     const response = await axios.post('http://localhost:8000/api/v1/accounts/login', { email, password });
+  //     console.log(response.data);
 
-  const handleEmailChange = (e) => {
+  //     // 스크랩 사이드패널로 이동하는 코드 작성
+  //   } catch (error) {
+  //     setErrorMessage(error.response.data.message);
+  //     openModal();
+  //     console.log('Error', error.response.data.message);
+  //   }
+  // };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
-  const handlePasswordChange = (e) => {
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
 
   const handleLoginClick = () => {
-    if (isButtonDisabled) {
-      // setIsModalOpen(true);
-    } else {
-      fetchPost();
+    if (!isButtonDisabled) {
+      mutation.mutate({ email, password });
     }
+    // if (isButtonDisabled) {
+    //   // setIsModalOpen(true);
+    // } else {
+    //   fetchPost();
+    // }
   };
 
   return (
