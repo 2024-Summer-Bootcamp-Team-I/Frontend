@@ -29,10 +29,7 @@ const SidePanel = () => {
       }}
     >
       <div className="flex flex-col items-center justify-center">
-        <Login />
-        <button onClick={openModal} className="text-[3rem]">
-          모달 열기
-        </button>
+        <Signup />
         {showModal && (
           <div>
             <div
