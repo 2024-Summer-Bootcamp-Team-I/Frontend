@@ -53,7 +53,6 @@ export default defineConfig({
     emptyOutDir: !isDev,
     rollupOptions: {
       external: ['@styles/tailwind.css'],
-
       input: {
         devtools: resolve(pagesDir, 'devtools', 'index.html'),
         panel: resolve(pagesDir, 'panel', 'index.html'),
@@ -73,6 +72,7 @@ export default defineConfig({
           const assetFileName = name === 'contentStyle' ? `${name}${getCacheInvalidationKey()}` : name;
           return `assets/[ext]/${assetFileName}.chunk.[ext]`;
         },
+        format: 'esm',
       },
     },
   },

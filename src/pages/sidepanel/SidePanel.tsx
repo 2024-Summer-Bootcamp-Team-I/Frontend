@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import '@src/global.css';
 import withSuspense from '@src/shared/hoc/withSuspense';
 import withErrorBoundary from '@src/shared/hoc/withErrorBoundary';
@@ -7,8 +8,9 @@ import Scrap from './Scrap';
 import Signup from './Signup';
 import Login from './Login';
 import Modal from '@src/components/Modal';
+import axios from 'axios';
 
-const SidePanel = () => {
+const SidePanel: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => setShowModal(true);
@@ -29,19 +31,7 @@ const SidePanel = () => {
       }}
     >
       <div className="flex flex-col items-center justify-center">
-        <Signup />
-        {showModal && (
-          <div>
-            <div
-              ref={outside}
-              onClick={handleOutsideClick}
-              className="fixed inset-0 flex items-center justify-center bg-black opacity-50 z-2"
-            ></div>
-            <div className="fixed inset-0 flex items-center justify-center z-1" onClick={handleOutsideClick}>
-              <Modal handleClose={closeModal} notice="이메일 형식이 올바르지 않습니다." />
-            </div>
-          </div>
-        )}
+        <Login />
       </div>
     </div>
   );

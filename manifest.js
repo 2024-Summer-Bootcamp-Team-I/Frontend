@@ -21,11 +21,11 @@ const manifest = {
   },
 
   permissions: ['storage', 'sidePanel', 'tabs'],
-  host_permissions: ['https://news.naver.com/section/105', 'https://n.news.naver.com/mnews/article/*'],
+  host_permissions: ['https://news.naver.com/section/*', 'https://n.news.naver.com/mnews/article/*'],
 
   side_panel: {
     default_path: 'src/pages/sidepanel/index.html',
-    matches: ['https://news.naver.com/section/105', 'https://n.news.naver.com/mnews/article/*'],
+    matches: ['https://news.naver.com/section/*', 'https://n.news.naver.com/mnews/article/*'],
   },
   options_page: 'src/pages/options/index.html',
 
@@ -37,14 +37,23 @@ const manifest = {
   },
   content_scripts: [
     {
-      matches: ['https://news.naver.com/section/105', 'https://n.news.naver.com/mnews/article/*'],
+      matches: ['https://news.naver.com/section/*', 'https://n.news.naver.com/mnews/article/*'],
       js: ['src/pages/content/index.js'],
+      type: 'module',
     },
   ],
   devtools_page: 'src/pages/devtools/index.html',
   web_accessible_resources: [
     {
-      resources: ['assets/js/*.js', 'assets/css/*.css', 'icon-128.png', 'icon-34.png', 'assets/img/*.svg'],
+      resources: [
+        'assets/js/*.js',
+        'assets/css/*.css',
+        'icon-128.png',
+        'icon-34.png',
+        'assets/img/*.svg',
+        'src/pages/newtab/index.html',
+        'src/pages/sidepanel/index.html',
+      ],
       matches: ['*://*/*'],
     },
   ],
