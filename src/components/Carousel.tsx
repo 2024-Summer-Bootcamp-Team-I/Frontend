@@ -6,8 +6,32 @@ import 'swiper/css/scrollbar';
 import 'swiper/css/effect-coverflow';
 import { Mousewheel, Scrollbar, EffectCoverflow, FreeMode } from 'swiper/modules';
 import SavedNews from './SavedNews';
+import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
+
+const fetchMyScrapItems = async () => {
+  const response = await axios.get('http://localhost:8000/api/v1/scraps/', {
+    params: { user_id: 1 },
+  });
+  return response.data.map((news: any) => ({
+    userId: news.user_id,
+    newsId: news.news.news_id,
+    title: news.news.title,
+    content: news.news.content,
+    img: news.news.img,
+    publishedDate: news.news.published_date,
+    channelName: news.channel_name,
+  }));
+};
 
 const Carousel: React.FC = () => {
+  const {
+    data: myScrapItems,
+    isLoading,
+    isError,
+    error,
+  } = useQuery<MyScrapItem[], Error>({ queryKey: ['scrapItems'], queryFn: fetchMyScrapItems });
+
   const swiperRef = useRef(null);
 
   // 페이지 스크롤 방지
@@ -40,9 +64,6 @@ const Carousel: React.FC = () => {
     };
   }, []);
 
-  // 슬라이드 데이터 설정
-  const newsData = Array.from({ length: 10 }, (_, index) => ({ id: index + 1 }));
-
   // 슬라이드 변경 시 슬라이드 투명도 및 크기 업데이트
   const updateSlideOpacityAndSize = (swiper) => {
     const slides = swiper.slides;
@@ -69,8 +90,11 @@ const Carousel: React.FC = () => {
     // 슬라이드 클릭 동작
   };
 
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>Error: {error.message}</p>;
+
   return (
-    <div className="flex overflow-hidden justify-center items-center">
+    <div className="flex items-center justify-center overflow-hidden">
       <div className="relative w-[66.75rem] h-[47rem] 3xl:w-[75rem] 3xl:h-[52rem] 4xl:w-[85rem] 4xl:h-[55rem]">
         <style>{`
           .swiper-scrollbar {
@@ -99,19 +123,17 @@ const Carousel: React.FC = () => {
           simulateTouch={false}
           freeMode={{ enabled: false }}
           speed={300}
-          className="h-full justify-center items-center"
+          className="items-center justify-center h-full"
           onSlideChange={updateSlideOpacityAndSize}
           onSwiper={updateSlideOpacityAndSize}
         >
-          {newsData.map((news, index) => (
+          {myScrapItems.map((item, index) => (
             <SwiperSlide
-              key={news.id}
-              className="flex justify-center items-center"
+              key={item.newsId}
+              className="flex items-center justify-center"
               onClick={() => handleSlideClick(index)}
             >
-              <div>
-                <SavedNews />
-              </div>
+              <SavedNews item={item} />
             </SwiperSlide>
           ))}
         </Swiper>

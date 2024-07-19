@@ -29,22 +29,7 @@ const SidePanel: React.FC = () => {
       }}
     >
       <div className="flex flex-col items-center justify-center">
-        <Login />
-        <button onClick={openModal} className="text-[3rem]">
-          모달 열기
-        </button>
-        {showModal && (
-          <div>
-            <div
-              ref={outside}
-              onClick={handleOutsideClick}
-              className="fixed inset-0 flex items-center justify-center bg-black opacity-50 z-2"
-            ></div>
-            <div className="fixed inset-0 flex items-center justify-center z-1" onClick={handleOutsideClick}>
-              <Modal handleClose={closeModal} notice="이메일 형식이 올바르지 않습니다." />
-            </div>
-          </div>
-        )}
+        <Scrap />
       </div>
     </div>
   );
