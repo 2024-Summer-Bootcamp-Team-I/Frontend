@@ -31,7 +31,7 @@ const SidePanel: React.FC = () => {
       }}
     >
       <div className="flex flex-col items-center justify-center">
-        <Login />
+        <Scrap />
       </div>
     </div>
   );

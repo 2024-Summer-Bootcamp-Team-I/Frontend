@@ -14,3 +14,13 @@ type ScrapItem = {
   publishedDate: string;
   channelName: string;
 };
+
+type MyScrapItem = {
+  userId: number;
+  newsId: string;
+  title: string;
+  content: string;
+  img: string;
+  publishedDate: string;
+  channelName: string;
+};
