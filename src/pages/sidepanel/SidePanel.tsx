@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import '@src/global.css';
 import withSuspense from '@src/shared/hoc/withSuspense';
 import withErrorBoundary from '@src/shared/hoc/withErrorBoundary';
@@ -7,6 +8,7 @@ import Scrap from './Scrap';
 import Signup from './Signup';
 import Login from './Login';
 import Modal from '@src/components/Modal';
+import axios from 'axios';
 
 const SidePanel: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
