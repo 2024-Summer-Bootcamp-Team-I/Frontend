@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 
-const WaveGraph = ({ data, carry }) => {
+const WaveGraph = ({ data }) => {
   const svgRef = useRef();
   const xAxisRef = useRef();
   const yAxisRef = useRef();

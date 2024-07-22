@@ -1,40 +1,60 @@
 import React, { useEffect, useState } from 'react';
 import WaveGraph from '@root/src/components/WaveGraph';
 import axios from 'axios';
-import { useQuery } from 'react-query';
-import TempButton from '@src/pages/newtab/TempButton';
+import { useQuery } from '@tanstack/react-query';
 
 interface DataItem {
   news_count: number;
   created_at: string;
 }
 
+const getNewsCountAPI = async () => {
+  const response = await axios.get('http://localhost:8000/api/v1/newscount');
+  return response.data;
+};
+
 // 여기엔 async하는 거아님
 const ServiceInfo: React.FC = () => {
+  const {
+    data: countData,
+    error,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ['newscount'],
+    queryFn: getNewsCountAPI,
+  });
+
   const [data, setData] = useState([]);
 
-  // 기존 mocking data
-  const mock = [
-    { date: '2024-06-30', value: 56 },
-    { date: '2024-07-01', value: 50 },
-    { date: '2024-07-02', value: 59 },
-    { date: '2024-07-03', value: 68 },
-    { date: '2024-07-04', value: 48 },
-    { date: '2024-07-05', value: 53 },
-    { date: '2024-07-06', value: 82 },
-    { date: '2024-07-07', value: 75 },
-    { date: '2024-07-08', value: 75 },
-  ];
-
-  const newscount = async () => {
-    try {
-      const response = await axios.get<DataItem[]>('http://localhost:8000/api/v1/newscount');
-      setData(response.data);
-      addItem(response.data);
-    } catch (error) {
-      console.log(error, 'error');
+  useEffect(() => {
+    if (countData) {
+      setData(countData);
+      addItem(countData);
     }
-  };
+  }, [countData]);
+
+  // 순서 중요. useEffect보다 앞서면 안됨
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    // 오류 객체를 Error 타입으로 단언
+    const errorMessage = (error as Error).message;
+    return <div>Error: {errorMessage}</div>;
+  }
+
+  // // 기존 방식
+  // const newscount = async () => {
+  //   try {
+  //     const response = await axios.get<DataItem[]>('http://localhost:8000/api/v1/newscount');
+  //     setData(response.data);
+  //     addItem(response.data);
+  //   } catch (error) {
+  //     console.log(error, 'error');
+  //   }
+  // };
 
   const addItem = (data) => {
     // if (data.length>0) //이게실행이안되었엇음
@@ -54,18 +74,17 @@ const ServiceInfo: React.FC = () => {
     });
   };
 
-  useEffect(() => {
-    newscount();
-  }, []);
+  // useEffect(() => {
+  //   newscount();
+  // }, []);
 
   return (
     <div className="flex items-center justify-center">
       <div className="flex items-center justify-center bg-white bg-opacity-10 rounded-[3.125rem] w-[85rem] h-[40rem] 3xl:w-[95rem] 3xl:h-[45rem] 4xl:w-[150rem] 4xl:h-[70rem] pl-[5rem] pr-32 pb-12 pt-24 ">
         <div className="scale-[0.85] 3xl:scale-[1] 4xl:scale-[1.55]">
-          <WaveGraph data={data} carry={data} />
+          <WaveGraph data={data} />
         </div>
-        {/* <TempButton /> */}
-        <button onClick={() => console.log(data)}>바뀐배열출력</button>
+        {/* <button onClick={() => console.log(data)}>배열 출력</button> */}
       </div>
     </div>
   );
