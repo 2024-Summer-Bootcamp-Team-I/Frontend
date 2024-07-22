@@ -61,13 +61,13 @@ const Carousel: React.FC = () => {
         slide.style.transform = 'scale(1)';
       } else if (index === swiper.activeIndex - 1 || index === swiper.activeIndex + 1) {
         slide.style.opacity = '0.8';
-        slide.style.transform = 'scale(0.7)';
+        slide.style.transform = 'scale(0.8)';
       } else if (index === swiper.activeIndex - 2 || index === swiper.activeIndex + 2) {
         slide.style.opacity = '0.6';
-        slide.style.transform = 'scale(0.5)';
+        slide.style.transform = 'scale(0.6)';
       } else {
         slide.style.opacity = '0.4';
-        slide.style.transform = 'scale(0.3)';
+        slide.style.transform = 'scale(0.4)';
       }
     });
   };
@@ -81,14 +81,22 @@ const Carousel: React.FC = () => {
   if (isError) return <p>Error: {error.message}</p>;
 
   return (
-    <div className="flex items-center justify-center overflow-hidden">
-      <div className="relative w-[66.75rem] h-[47rem] 3xl:w-[75rem] 3xl:h-[52rem] 4xl:w-[85rem] 4xl:h-[55rem]">
+    <div className="flex overflow-hidden justify-center items-center h-screen mt-[-4rem] 3xl:scale-100 4xl:scale-125">
+      <div className="relative w-[66.75rem] h-[47rem] 3xl:w-[80rem] 4xl:w-[100rem] 4xl:h-[50rem] ">
         <style>{`
           .swiper-scrollbar {
             background: transparent;
           }
           .swiper-scrollbar-drag {
             background: black;
+          }
+          .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: auto;
+            width: 100%
+            transition: opacity 0.5s ease, transform 0.5s ease;
           }
         `}</style>
         <Swiper
@@ -100,7 +108,7 @@ const Carousel: React.FC = () => {
           coverflowEffect={{
             rotate: 0,
             stretch: 0,
-            depth: 200,
+            depth: 100,
             modifier: 1,
             slideShadows: false,
           }}
@@ -110,7 +118,7 @@ const Carousel: React.FC = () => {
           simulateTouch={false}
           freeMode={{ enabled: false }}
           speed={300}
-          className="items-center justify-center h-full"
+          className="h-full"
           onSlideChange={updateSlideOpacityAndSize}
           onSwiper={updateSlideOpacityAndSize}
         >
