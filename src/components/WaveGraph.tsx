@@ -1,14 +1,8 @@
 // src/WaveGraph.js
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
-import axios from 'axios';
 
 const WaveGraph = ({ data, carry }) => {
-  // 파란 그래프와 하얀 그래프의 높이 차가 점수에 따라 달라지게 구현
-  // const data2 = [];
-  // for (var i = 0; i < data.length; i++) {
-  //   data2[i] = 1.15 * data[i];
-  // }
   const svgRef = useRef();
   const xAxisRef = useRef();
   const yAxisRef = useRef();
@@ -25,23 +19,33 @@ const WaveGraph = ({ data, carry }) => {
 
     // 데이터를 날짜 형식으로 변환
     data = data.map((d) => ({ date: parseDate(d.created_at), value: d.news_count }));
-    // data = data.map((d) => ({ date: parseDate(d.date), value: d.value }));
+
+    // 파란 그래프와 하얀 그래프의 높이 차가 점수에 따라 달라지게 구현
     const data2 = data.map((d) => ({ date: d.date, value: 1.15 * d.value }));
 
     const chart = svg.append('g');
 
+    // const x = d3
+    //   .scaleTime()
+    //   .domain([0,data.length-1])
+    //   .domain(d3.extent(data, (d) => d.date))
+    //   .range([0, 1392]);
+
     const x = d3
-      // .scaleLinear()
-      // .domain([0, data.length - 1])
-      .scaleTime()
-      .domain(d3.extent(data, (d) => d.date))
+      .scalePoint() // x축의 도메인을 데이터의 날짜 배열로 설정 1
+      .domain(data.map((d) => d.date)) // x축의 도메인을 데이터의 날짜 배열로 설정 2
       .range([0, 1392]);
+    // .padding(0.5); // 포인트 간의 간격 조절(고정값이라 바꾸면 양옆이 비거나 초과할 수 있음)
 
     const y = d3.scaleLinear().domain([0, 370]).range([640, 0]); // 이 부분을 조절하면 위쪽에 여백을 남길 수 있음(신뢰도가 100일때 부자연스럽게 위에 닿는 것 방지)
     // 물론 range값이 축에도 영향을 주니 주의
 
-    // const xAxis = d3.axisBottom(x).ticks(data.length);
-    const xAxis = d3.axisBottom(x).ticks(data.length).tickFormat(formatDate);
+    // const xAxis = d3.axisBottom(x).ticks(data.length).tickFormat(formatDate);;
+    const xAxis = d3
+      .axisBottom(x)
+      .tickValues(data.map((d) => d.date)) // s축 눈금 설정. tickValues를 데이터의 날짜 배열로 설정하여 존재하는 날짜만
+      .tickFormat(formatDate);
+
     d3.select(xAxisRef.current)
       .call(xAxis)
       .selectAll('text')
@@ -104,6 +108,7 @@ const WaveGraph = ({ data, carry }) => {
       .y0(640)
       .y1((d) => y(d.value))
       .curve(d3.curveNatural);
+    // .curve(d3.curveNatural);
 
     const whiteinitialArea = d3
       .area()

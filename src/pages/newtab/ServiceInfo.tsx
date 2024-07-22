@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import WaveGraph from '@root/src/components/WaveGraph';
 import axios from 'axios';
+import { useQuery } from 'react-query';
+import TempButton from '@src/pages/newtab/TempButton';
 
-const ServiceInfo = () => {
-  // 여기엔 async하는 거아님
+interface DataItem {
+  news_count: number;
+  created_at: string;
+}
+
+// 여기엔 async하는 거아님
+const ServiceInfo: React.FC = () => {
   const [data, setData] = useState([]);
 
+  // 기존 mocking data
   const mock = [
-    // 기존 mocking data
     { date: '2024-06-30', value: 56 },
     { date: '2024-07-01', value: 50 },
     { date: '2024-07-02', value: 59 },
@@ -21,31 +28,34 @@ const ServiceInfo = () => {
 
   const newscount = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/api/v1/newscount');
+      const response = await axios.get<DataItem[]>('http://localhost:8000/api/v1/newscount');
       setData(response.data);
+      addItem(response.data);
     } catch (error) {
       console.log(error, 'error');
     }
   };
 
-  const addItem = async () => {
-    if (data.length > 0) {
-      const latestDate = new Date(data[0].created_at); //String 타입인 값을 'Date' 객체로 변환
-      latestDate.setDate(latestDate.getDate() + 1); // 날짜 하루 증가
-      const nextDate = latestDate.toISOString().split('T')[0]; // 날짜를 YYYY-MM-DD 형식의 문자열로 변환
+  const addItem = (data) => {
+    // if (data.length>0) //이게실행이안되었엇음
+    const latestDate = new Date(data[0].created_at); //String 타입인 값을 'Date' 객체로 변환
+    latestDate.setDate(latestDate.getDate() + 1); // 날짜 하루 증가
+    const nextDate = latestDate.toISOString().split('T')[0]; // 날짜를 YYYY-MM-DD 형식의 문자열로 변환
 
-      const latestHalf = data[0].news_count / 2;
+    const latestHalf = data[0].news_count / 2;
 
-      const newItem = { news_count: latestHalf, created_at: nextDate };
+    const newItem: DataItem = { news_count: latestHalf, created_at: nextDate };
 
-      setData((data) => [...data, newItem]);
-      console.log(data);
-    }
+    // setData((prev) => [...prev, newItem]);
+    setData((prev) => {
+      const updatedData = [...prev, newItem];
+      updatedData.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+      return updatedData;
+    });
   };
 
   useEffect(() => {
     newscount();
-    addItem();
   }, []);
 
   return (
@@ -54,8 +64,8 @@ const ServiceInfo = () => {
         <div className="scale-[0.85] 3xl:scale-[1] 4xl:scale-[1.55]">
           <WaveGraph data={data} carry={data} />
         </div>
-        <button onClick={addItem}>바뀐배열출력</button>
-        <button onClick={() => console.log(data)}>배열출력</button>
+        {/* <TempButton /> */}
+        <button onClick={() => console.log(data)}>바뀐배열출력</button>
       </div>
     </div>
   );
