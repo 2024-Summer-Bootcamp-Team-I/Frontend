@@ -48,9 +48,6 @@ const Carousel: React.FC = () => {
     };
   }, []);
 
-  // 슬라이드 데이터 설정
-  const newsData = Array.from({ length: 10 }, (_, index) => ({ id: index + 1 }));
-
   // 슬라이드 변경 시 슬라이드 투명도 및 크기 업데이트
   const updateSlideOpacityAndSize = (swiper) => {
     const slides = swiper.slides;
@@ -79,6 +76,8 @@ const Carousel: React.FC = () => {
 
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error: {error.message}</p>;
+
+  const sortedScrapItems = [...myScrapItems].reverse();
 
   return (
     <div className="flex overflow-hidden justify-center items-center h-screen mt-[-4rem] 3xl:scale-100 4xl:scale-125">
@@ -122,7 +121,7 @@ const Carousel: React.FC = () => {
           onSlideChange={updateSlideOpacityAndSize}
           onSwiper={updateSlideOpacityAndSize}
         >
-          {myScrapItems.reverse().map((item, index) => (
+          {sortedScrapItems.map((item, index) => (
             <SwiperSlide
               key={item.newsId}
               className="flex items-center justify-center"
