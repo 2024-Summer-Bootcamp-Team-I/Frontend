@@ -29,9 +29,6 @@ const manifest = {
   },
   options_page: 'src/pages/options/index.html',
 
-  chrome_url_overrides: {
-    newtab: 'src/pages/newtab/index.html',
-  },
   icons: {
     128: 'icon-128.png',
   },

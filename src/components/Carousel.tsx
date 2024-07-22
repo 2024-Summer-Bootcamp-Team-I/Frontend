@@ -10,8 +10,9 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 
 const fetchMyScrapItems = async () => {
+  const userId = localStorage.getItem('user_id');
   const response = await axios.get('http://localhost:8000/api/v1/scraps/', {
-    params: { user_id: 1 },
+    params: { user_id: userId },
   });
   return response.data.map((news: any) => ({
     userId: news.user_id,
@@ -21,6 +22,7 @@ const fetchMyScrapItems = async () => {
     img: news.news.img,
     publishedDate: news.news.published_date,
     channelName: news.channel_name,
+    type: news.news.type,
   }));
 };
 
@@ -120,7 +122,7 @@ const Carousel: React.FC = () => {
           onSlideChange={updateSlideOpacityAndSize}
           onSwiper={updateSlideOpacityAndSize}
         >
-          {myScrapItems.map((item, index) => (
+          {myScrapItems.reverse().map((item, index) => (
             <SwiperSlide
               key={item.newsId}
               className="flex items-center justify-center"
