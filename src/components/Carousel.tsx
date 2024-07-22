@@ -122,7 +122,7 @@ const Carousel: React.FC = () => {
           onSlideChange={updateSlideOpacityAndSize}
           onSwiper={updateSlideOpacityAndSize}
         >
-          {myScrapItems.map((item, index) => (
+          {myScrapItems.reverse().map((item, index) => (
             <SwiperSlide
               key={item.newsId}
               className="flex items-center justify-center"
