@@ -10,8 +10,9 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 
 const fetchMyScrapItems = async () => {
+  const userId = localStorage.getItem('user_id');
   const response = await axios.get('http://localhost:8000/api/v1/scraps/', {
-    params: { user_id: 1 },
+    params: { user_id: userId },
   });
   return response.data.map((news: any) => ({
     userId: news.user_id,
@@ -21,6 +22,7 @@ const fetchMyScrapItems = async () => {
     img: news.news.img,
     publishedDate: news.news.published_date,
     channelName: news.channel_name,
+    type: news.news.type,
   }));
 };
 
@@ -46,10 +48,8 @@ const Carousel: React.FC = () => {
     };
   }, []);
 
-
   // 슬라이드 데이터 설정
   const newsData = Array.from({ length: 10 }, (_, index) => ({ id: index + 1 }));
-
 
   // 슬라이드 변경 시 슬라이드 투명도 및 크기 업데이트
   const updateSlideOpacityAndSize = (swiper) => {

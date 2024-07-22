@@ -6,6 +6,7 @@ import usernameicon from '@root/src/assets/img/usernameicon.svg';
 import emailicon from '@root/src/assets/img/emailicon.svg';
 import passwordicon from '@root/src/assets/img/passwordicon.svg';
 import Modal from '@root/src/components/Modal';
+import { useNavigate } from 'react-router-dom';
 
 interface SignupData {
   email: string;
@@ -23,6 +24,8 @@ const signup = async (userData: SignupData): Promise<SignupResponse> => {
 };
 
 const Signup = () => {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -50,6 +53,7 @@ const Signup = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setNotice('');
+    navigate(`/login`);
   };
 
   const isFormValid = username && email && password;
@@ -99,7 +103,7 @@ const Signup = () => {
         가입하기
       </button>
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative z-10">
             <Modal notice={notice} handleClose={handleCloseModal} />

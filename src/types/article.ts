@@ -1,20 +1,24 @@
-type Article = {
-  id: number;
-  channelId: number;
+type NewsData = {
   title: string;
-  image: string;
+  channel: string;
+  published_date: string;
   content: string;
-  category: string;
-  publishDate: string;
+  summarize: string;
+  img: string;
+  similar_articles: SimilarArticle[];
+  opposite_articles: OppositeArticle[];
 };
 
-type ChannelName = {
-  id: number;
-  name: string;
+type SimilarArticle = {
+  news_id: number;
+  channel: string;
+  title: string;
+  url: string;
 };
 
-type Discriminant = {
-  newsId: number;
-  score: number;
-  reason: string;
+type OppositeArticle = {
+  news_id: number;
+  channel: string;
+  title: string;
+  url: string;
 };

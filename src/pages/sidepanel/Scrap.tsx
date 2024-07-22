@@ -6,11 +6,14 @@ import ShortcutIcon from '@src/assets/img/ShortcutsIcon.svg';
 import axios from 'axios';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 
 const fetchScrapItems = async () => {
+  const userId = localStorage.getItem('user_id');
   const response = await axios.get('http://localhost:8000/api/v1/scraps/', {
-    params: { user_id: 1 },
+    params: { user_id: userId },
   });
+  console.log('userId:', userId); // user_id 확인
   return response.data.map((news: any) => ({
     userId: news.user_id,
     newsId: news.news.news_id,
@@ -18,28 +21,41 @@ const fetchScrapItems = async () => {
     img: news.news.img,
     publishedDate: news.news.published_date,
     channelName: news.channel_name,
+    type: news.news.type,
   }));
 };
 
 const postScrapItem = async (item: DragItem) => {
+  const userId = localStorage.getItem('user_id');
   const response = await axios.post(
     'http://localhost:8000/api/v1/scraps/',
     { url: item.url },
-    { params: { user_id: 1 } }, // 적절한 user_id로 변경
+    { params: { user_id: userId } }, // 적절한 user_id로 변경
   );
   console.log('Scrap item posted:', response.data);
+  console.log('userId:', userId); // user_id 확인
   return {
-    userId: 1,
+    userId: response.data.user_id,
     newsId: response.data.news.news_id,
     title: response.data.news.title,
     img: response.data.news.img,
     publishedDate: response.data.news.published_date,
     channelName: response.data.channel_name,
+    type: response.data.news.type,
   };
 };
 
 const Scrap: React.FC = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const userId = localStorage.getItem('user_id');
+    if (!userId) {
+      navigate('/login'); // 사용자 ID가 없으면 로그인 페이지로 이동
+    }
+  }, [navigate]);
+
   const {
     data: scrapItems,
     isLoading,
@@ -47,7 +63,7 @@ const Scrap: React.FC = () => {
     error,
   } = useQuery<ScrapItem[], Error>({ queryKey: ['scrapItems'], queryFn: fetchScrapItems });
   const mutation = useMutation<
-    { userId: number; newsId: any; title: any; img: any; publishedDate: any; channelName: any },
+    { userId: number; newsId: any; title: any; img: any; publishedDate: any; channelName: any; type: any },
     Error,
     DragItem
   >({
@@ -60,7 +76,7 @@ const Scrap: React.FC = () => {
   const [scrollHeight, setScrollHeight] = useState('20rem');
 
   const handleButtonClick = () => {
-    chrome.tabs.create({ url: 'chrome://newtab' });
+    chrome.tabs.create({ url: chrome.runtime.getURL('src/pages/newtab/index.html') });
     window.close();
   };
 
@@ -73,6 +89,11 @@ const Scrap: React.FC = () => {
     queryClient.setQueryData(['scrapItems'], (oldItems: ScrapItem[] = []) =>
       oldItems.filter((item) => item.newsId !== newsId),
     );
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('user_id'); // 사용자 ID 제거
+    navigate('/login'); // 로그인 페이지로 이동
   };
 
   useEffect(() => {
@@ -148,6 +169,12 @@ const Scrap: React.FC = () => {
             ))}
           </PerfectScrollbar>
         </div>
+        <p
+          onClick={handleLogout}
+          className="flex justify-center items-center text-white text-[1rem] underline cursor-pointer mt-4"
+        >
+          로그아웃
+        </p>
       </div>
     </div>
   );
