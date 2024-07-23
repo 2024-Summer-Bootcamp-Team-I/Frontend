@@ -1,11 +1,26 @@
 // src/WaveGraph.js
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
+import InfoIcon from '@assets/img/InfoIcon.svg';
+import WaveModal from './WaveModal';
+import xbutton from '@src/assets/img/xbutton.svg';
 
 const WaveGraph = ({ data }) => {
   const svgRef = useRef();
   const xAxisRef = useRef();
   const yAxisRef = useRef();
+
+  const [Modal, OpenModal] = useState(false);
+
+  const HandleOpenModal = () => {
+    if (!Modal) {
+      OpenModal(true);
+      console.log(Modal);
+    } else {
+      OpenModal(false);
+      console.log(Modal);
+    }
+  };
 
   useEffect(() => {
     const svg = d3
@@ -21,7 +36,7 @@ const WaveGraph = ({ data }) => {
     data = data.map((d) => ({ date: parseDate(d.created_at), value: d.news_count }));
 
     // 파란 그래프와 하얀 그래프의 높이 차가 점수에 따라 달라지게 구현
-    const data2 = data.map((d) => ({ date: d.date, value: 1.15 * d.value }));
+    const data2 = data.map((d) => ({ date: d.date, value: 15 + d.value + 0.1 * d.value }));
 
     const chart = svg.append('g');
 
@@ -120,12 +135,11 @@ const WaveGraph = ({ data }) => {
       .y0(640)
       .y1((d) => y(d.value))
       .curve(d3.curveNatural);
-    // .curve(d3.curveNatural);
 
     const whiteinitialArea = d3
       .area()
       .x((d) => x(d.date))
-      .y0(600)
+      .y0(640) // 시작 위치
       .y1(640)
       .curve(d3.curveNatural);
 
@@ -161,6 +175,7 @@ const WaveGraph = ({ data }) => {
 
       const isEdge = i === 0 || i === data.length - 1;
 
+      // 수직선
       chart
         .append('line')
         .attr('x1', xCoord)
@@ -174,10 +189,11 @@ const WaveGraph = ({ data }) => {
         .duration(1150)
         .attr('y2', yCoord); // 애니메이션을 통해 y2값을 실제 y값으로 이동
 
+      // 좌표값
       chart
         .append('text')
         .attr('x', xCoord)
-        .attr('y', yCoord - 15)
+        .attr('y', d.value > 200 ? yCoord - 24 : d.value > 100 ? yCoord - 17.5 : yCoord - 15)
         .attr('fill', '#08B0D5')
         .attr('text-anchor', 'middle')
         .style('font-size', '1rem')
@@ -207,6 +223,16 @@ const WaveGraph = ({ data }) => {
         <svg ref={yAxisRef} className="w-10"></svg>
         <div className="flex flex-col">
           <div className="w-[87rem] h-[40rem] bg-[#fff0d5] rounded-[2.5rem]">
+            <div
+              className="fixed top-4 right-6 w-[7.5rem] h-8 flex justify-between items-center hover:text-black z-2"
+              // className="fixed top-4 right-6 w-[7.5rem] h-8 flex justify-between items-center duration-200 hover:filter hover:invert transition-filter z-2"
+            >
+              <p className="text-[1.25rem] text-[#505050] font-bold">수치정보</p>
+              <button onClick={HandleOpenModal} className="duration-200 hover:filter hover:invert transition-filter">
+                {Modal ? <img src={xbutton} /> : <img src={InfoIcon} />}
+              </button>
+            </div>
+            {Modal ? <WaveModal /> : null}
             <svg ref={svgRef} className="rounded-[2.5rem]"></svg>
           </div>
           <svg ref={xAxisRef} className="h-10 w-[87rem]"></svg>

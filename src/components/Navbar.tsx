@@ -31,7 +31,7 @@ const Navbar = () => {
             <button
               className={`w-[10rem] h-[3rem] text-center rounded-full content-center ${currentPage === '/serviceinfo' ? 'bg-midnight text-white shadow-inner' : ''}`}
             >
-              서비스 정보
+              판별 통계
             </button>
           </Link>
         </div>
