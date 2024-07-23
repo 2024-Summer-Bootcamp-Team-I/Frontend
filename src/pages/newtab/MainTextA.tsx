@@ -5,6 +5,8 @@ import { useQuery } from '@tanstack/react-query';
 import tvIcon from '@src/assets/img/TV.svg';
 import calendarIcon from '@assets/img/Calendar.svg';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import Lottie from 'react-lottie-player';
+import loadingAnimation from '@src/assets/img/loading004.json';
 
 const fetchNewsData = async (newsId: string) => {
   const response = await axios.get(`http://localhost:8000/api/v1/classifies/${newsId}`);
@@ -33,9 +35,14 @@ const MainTextA: React.FC = () => {
     enabled: !!newsId,
   });
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  if (isLoading)
+    return (
+      <div>
+        <Lottie loop animationData={loadingAnimation} play style={{ width: 300, height: 300 }} />
+      </div>
+    );
+
+  // if (isLoading) {return <div>Loading...</div>}
 
   if (isError) {
     return <div>Error: {(error as Error).message}</div>;
