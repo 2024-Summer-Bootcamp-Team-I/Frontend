@@ -43,7 +43,7 @@ const WaveGraph = ({ data }) => {
     // const xAxis = d3.axisBottom(x).ticks(data.length).tickFormat(formatDate);;
     const xAxis = d3
       .axisBottom(x)
-      .tickValues(data.map((d) => d.date)) // s축 눈금 설정. tickValues를 데이터의 날짜 배열로 설정하여 존재하는 날짜만
+      .tickValues(data.map((d) => d.date)) // x축 눈금 설정. tickValues를 데이터의 날짜 배열로 설정하여 존재하는 날짜만
       .tickFormat(formatDate);
 
     d3.select(xAxisRef.current)
@@ -59,11 +59,11 @@ const WaveGraph = ({ data }) => {
     xAxisTicks
       .selectAll('text')
       .filter((d, i, nodes) => i === 0)
-      .style('fill', 'transparent'); // 첫 번째 눈금 스타일 적용
+      .style('fill', 'transparent'); // 첫 번째 날짜 스타일 적용
     xAxisTicks
       .selectAll('text')
       .filter((d, i, nodes) => i === nodes.length - 1)
-      .style('fill', 'transparent'); // 마지막 눈금 스타일 적용
+      .style('fill', 'transparent'); // 마지막 날짜 스타일 적용
 
     // y축 설정
     const yTickValues = d3.range(0, 370, 50);
@@ -143,9 +143,11 @@ const WaveGraph = ({ data }) => {
     blueAreaPath.transition().delay(50).duration(1500).ease(d3.easeCircleOut).attr('d', area);
 
     // 수직선 추가 및 좌표 출력
-    data.forEach((d) => {
+    data.forEach((d, i) => {
       const xCoord = x(d.date);
       const yCoord = y(d.value);
+
+      const isEdge = i === 0 || i === data.length - 1;
 
       chart
         .append('line')
@@ -153,7 +155,7 @@ const WaveGraph = ({ data }) => {
         .attr('x2', xCoord)
         .attr('y1', 640) // 초기에는 y1과 y2를 모두 하단에 설정. 애니메이션 넣기 전에는 여기도 yCoor였음
         .attr('y2', 640) // 차트의 하단 y좌표
-        .attr('stroke', '#ffffff')
+        .attr('stroke', isEdge ? 'transparent' : '#ffffff')
         .attr('stroke-width', 1)
         .attr('stroke-dasharray', '5,5')
         .transition()
@@ -168,11 +170,11 @@ const WaveGraph = ({ data }) => {
         .attr('text-anchor', 'middle')
         .style('font-size', '1rem')
         .style('font-weight', 'bold')
-        .style('opacity', 0)
+        .style('opacity', 0) // 처음 투명도는 0
         .transition()
         .delay(1200)
         .ease(d3.easeCubicIn)
-        .style('opacity', 1)
+        .style('opacity', isEdge ? 0 : 1) // 애니메이션을 통해 투명도가 변화
         .text(d.value);
     });
 
