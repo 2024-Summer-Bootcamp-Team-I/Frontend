@@ -80,7 +80,7 @@ const Carousel: React.FC = () => {
   const sortedScrapItems = [...myScrapItems].reverse();
 
   return (
-    <div className="flex overflow-hidden justify-center items-center h-screen mt-[-4rem] 3xl:scale-100 4xl:scale-125">
+    <div className="flex overflow-hidden justify-center items-center mt-[-4rem] 3xl:scale-100 4xl:scale-125">
       <div className="relative w-[66.75rem] h-[47rem] 3xl:w-[80rem] 4xl:w-[100rem] 4xl:h-[50rem] ">
         <style>{`
           .swiper-scrollbar {

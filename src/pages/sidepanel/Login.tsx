@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation, UseMutationResult, useQuery } from '@tanstack/react-query';
-import logo from '@root/src/assets/img/logo.png';
+import logo from '@root/src/assets/img/Logo.svg';
 import emailicon from '@root/src/assets/img/emailicon.svg';
 import passwordicon from '@root/src/assets/img/passwordicon.svg';
 import axios, { AxiosError } from 'axios';
@@ -71,7 +71,7 @@ const Login: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <img src={logo} alt="Logo" className="w-[5rem] h-[1.5rem] mb-[5.5rem]" />
+      <img src={logo} alt="Logo" className="w-[16rem] h-[4rem] mb-[5.5rem]" />
       <div className="space-y-[1.5rem]">
         <div className="flex items-center w-[24rem] h-[3.75rem] bg-white rounded-full border border-gray-400">
           <input
@@ -101,7 +101,7 @@ const Login: React.FC = () => {
       >
         로그인
       </button>
-      <p onClick={handleSignUpClick} className="text-white text-[1rem] underline">
+      <p onClick={handleSignUpClick} className="text-white text-[1rem] underline cursor-pointer">
         회원가입
       </p>
       {showModal && (
