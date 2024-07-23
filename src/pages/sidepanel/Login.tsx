@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useMutation, UseMutationResult } from '@tanstack/react-query';
-import logo from '@root/src/assets/img/logo.png';
+import { useMutation, UseMutationResult, useQuery } from '@tanstack/react-query';
+import logo from '@root/src/assets/img/Logo.svg';
 import emailicon from '@root/src/assets/img/emailicon.svg';
 import passwordicon from '@root/src/assets/img/passwordicon.svg';
-import axios, { Axios, AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError } from 'axios';
 import Modal from '@root/src/components/Modal';
+import { useNavigate } from 'react-router-dom';
 
 interface LoginProps {
   email: string;
@@ -13,14 +14,18 @@ interface LoginProps {
 
 interface LoginResponse {
   message: string;
+  user_id: number;
 }
 
 const login = async ({ email, password }: LoginProps): Promise<LoginResponse> => {
   const response = await axios.post('http://localhost:8000/api/v1/accounts/login', { email, password });
+  console.log('Login response:', response.data);
   return response.data;
 };
 
 const Login: React.FC = () => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showModal, setShowModal] = useState(false);
@@ -34,12 +39,13 @@ const Login: React.FC = () => {
   const mutation = useMutation<LoginResponse, AxiosError, LoginProps>({
     mutationFn: login,
     onSuccess: (data) => {
-      console.log(data);
+      console.log('Login success:', data);
+      localStorage.setItem('user_id', data.user_id.toString());
+      navigate('/scrap');
     },
     onError: (error: AxiosError<LoginResponse>) => {
       const errorMessage = error.response?.data?.message;
-
-      setErrorMessage(errorMessage);
+      setErrorMessage(errorMessage || '로그인 실패');
       openModal();
       console.log(error);
     },
@@ -59,9 +65,13 @@ const Login: React.FC = () => {
     }
   };
 
+  const handleSignUpClick = () => {
+    navigate('/signup');
+  };
+
   return (
     <div className="flex flex-col items-center">
-      <img src={logo} alt="Logo" className="w-[5rem] h-[1.5rem] mb-[5.5rem]" />
+      <img src={logo} alt="Logo" className="w-[16rem] h-[4rem] mb-[5.5rem]" />
       <div className="space-y-[1.5rem]">
         <div className="flex items-center w-[24rem] h-[3.75rem] bg-white rounded-full border border-gray-400">
           <input
@@ -91,7 +101,9 @@ const Login: React.FC = () => {
       >
         로그인
       </button>
-      <p className="text-white text-[1rem] underline">회원가입</p>
+      <p onClick={handleSignUpClick} className="text-white text-[1rem] underline cursor-pointer">
+        회원가입
+      </p>
       {showModal && (
         <div>
           <div className="fixed inset-0 flex items-center justify-center bg-black opacity-50 z-2"></div>

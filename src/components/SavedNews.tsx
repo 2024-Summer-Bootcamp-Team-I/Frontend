@@ -1,16 +1,27 @@
+import React from 'react';
 import articleEx from '@src/assets/img/article1.svg';
 import tvIcon from '@src/assets/img/TV.svg';
 import calendarIcon from '@assets/img/Calendar.svg';
-import waterdrop from '@assets/img/waterdrop.svg';
-import LiquidFillGauge from './LiquidFillGauge';
+import { useNavigate } from 'react-router-dom';
 
 type SavedNewsProps = {
   item: MyScrapItem;
 };
 
 const SavedNews: React.FC<SavedNewsProps> = ({ item }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    console.log('Clicked item:', item); // item을 콘솔에 출력하여 newsId 확인
+    if (item.type === 'a') {
+      navigate(`/maintexta/${item.newsId}`);
+    } else if (item.type === 'c') {
+      navigate(`/maintextc/${item.newsId}`);
+    }
+  };
+
   return (
-    <div className="w-[64.75rem] h-[15.5rem] 3xl:w-[67rem] 4xl:w-[80rem]">
+    <div onClick={handleClick} className="w-[64.75rem] h-[15.5rem] 3xl:w-[67rem] 4xl:w-[80rem] cursor-pointer">
       <div className="flex flex-row bg-white rounded-[3.75rem] shadow-lg items-center">
         <img
           src={item.img || articleEx}

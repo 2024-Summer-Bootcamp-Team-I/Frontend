@@ -13,6 +13,7 @@ type ScrapItem = {
   img: string;
   publishedDate: string;
   channelName: string;
+  type: string;
 };
 
 type MyScrapItem = {
@@ -23,4 +24,5 @@ type MyScrapItem = {
   img: string;
   publishedDate: string;
   channelName: string;
+  type: string;
 };

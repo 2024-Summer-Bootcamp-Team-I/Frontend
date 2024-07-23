@@ -17,7 +17,7 @@ const manifest = {
 
   action: {
     default_title: 'Click to open panel',
-    default_icon: 'icon-34.png',
+    default_icon: 'Logo1.png',
   },
 
   permissions: ['storage', 'sidePanel', 'tabs'],
@@ -29,11 +29,8 @@ const manifest = {
   },
   options_page: 'src/pages/options/index.html',
 
-  chrome_url_overrides: {
-    newtab: 'src/pages/newtab/index.html',
-  },
   icons: {
-    128: 'icon-128.png',
+    128: 'Logo1.png',
   },
   content_scripts: [
     {
@@ -48,8 +45,7 @@ const manifest = {
       resources: [
         'assets/js/*.js',
         'assets/css/*.css',
-        'icon-128.png',
-        'icon-34.png',
+        'Logo1.png',
         'assets/img/*.svg',
         'src/pages/newtab/index.html',
         'src/pages/sidepanel/index.html',

@@ -16,9 +16,9 @@ document.querySelectorAll('.sa_item_inner').forEach((element) => {
 });
 
 // 마우스 다운 이벤트 추가 (디버깅용)
-document.addEventListener('mousedown', (event) => {
-  console.log('Mousedown event:', event.target);
-});
+// document.addEventListener('mousedown', (event) => {
+//   console.log('Mousedown event:', event.target);
+// });
 
 document.addEventListener('dragstart', (event) => {
   const target = event.target as HTMLElement;
