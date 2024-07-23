@@ -9,9 +9,9 @@ type TrustScoreProps = {
 
 const TrustScore: React.FC<TrustScoreProps> = ({ newsId, score }) => {
   return (
-    <div className="flex-col w-[26rem] h-[18rem] bg-white rounded-[2.5rem] shadow-lg">
+    <div className="flex-col w-[30rem] h-[18rem] bg-white rounded-[2.5rem] shadow-lg">
       <p className="px-[2.5rem] py-8 text-2xl underline underline-offset-8 text-[#106AAB] font-semibold">판별 점수</p>
-      <div className="flex justify-between mx-[2.5rem]">
+      <div className="flex justify-between mx-[3rem]">
         <div className="w-[10rem] h-[10rem]">
           <LiquidFillGauge elementId={newsId} value={score} />
         </div>

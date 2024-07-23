@@ -11,7 +11,7 @@ import { useQuery } from '@tanstack/react-query';
 
 const fetchMyScrapItems = async () => {
   const userId = localStorage.getItem('user_id');
-  const response = await axios.get('http://localhost:8000/api/v1/scraps/', {
+  const response = await axios.get('http://localhost/api/v1/scraps/', {
     params: { user_id: userId },
   });
   return response.data.map((news: any) => ({
