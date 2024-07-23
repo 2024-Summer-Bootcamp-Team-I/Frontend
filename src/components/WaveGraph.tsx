@@ -55,6 +55,18 @@ const WaveGraph = ({ data }) => {
 
     d3.select(xAxisRef.current).selectAll('.domain').attr('stroke', 'none');
 
+    // 모든 눈금선 흰색으로 -> 근데 좀 이상해서 아예 없애는 게 나을 듯. 수직선과 디자인 차이가 나서 이질감 듬
+    // d3.select(xAxisRef.current).selectAll('.tick line').attr('stroke', '#ffffff');
+
+    // // 첫 번째 눈금선 제거
+    // d3.select(xAxisRef.current)
+    //   .selectAll('.tick line')
+    //   .filter((d, i) => i === 0)
+    //   .remove();
+
+    // x축의 모든 눈금선 제거
+    d3.select(xAxisRef.current).selectAll('.tick line').remove();
+
     const xAxisTicks = d3.select(xAxisRef.current).call(xAxis);
     xAxisTicks
       .selectAll('text')
