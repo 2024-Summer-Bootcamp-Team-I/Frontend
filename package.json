@@ -1,7 +1,7 @@
 {
-  "name": "team-i",
+  "name": "news-inside",
   "version": "0.0.1",
-  "description": "가짜뉴스 판별 서비스",
+  "description": "NEWS Inside",
   "license": "MIT",
   "repository": {
     "type": "git",

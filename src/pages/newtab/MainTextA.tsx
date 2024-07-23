@@ -60,7 +60,10 @@ const MainTextA: React.FC = () => {
             <img src={newsData.img} alt={newsData.title} className="w-full h-full rounded-[2.5rem] scale-90" />
           </div>
 
-          <p className="mt-8 text-base pr-[3rem] 4xl:pr-[6rem]">{newsData.content}</p>
+          <p
+            className="mt-8 text-base pr-[3rem] 4xl:pr-[6rem]"
+            dangerouslySetInnerHTML={{ __html: newsData.content.replace(/\n/g, '<br/>') }}
+          ></p>
         </PerfectScrollbar>
       </div>
       <div className="flex flex-col space-y-[2rem] 4xl:space-y-[4rem]">
@@ -72,7 +75,7 @@ const MainTextA: React.FC = () => {
         </div>
         <div className="w-[30rem] h-[12.5rem] 3xl:h-[15rem] 4xl:h-[20rem] rounded-[2.5rem] bg-white pl-10 py-8">
           <PerfectScrollbar className="w-full h-full">
-            <p className="text-2xl underline underline-offset-8 text-[#106A0A] font-semibold pb-8">관련 기사</p>
+            <p className="text-2xl underline underline-offset-8 text-[#106AAB] font-semibold pb-8">관련 기사</p>
             {newsData.similar_articles.map((article, index) => (
               <p key={index} className="pr-10 text-base">
                 {index + 1}.{' '}
