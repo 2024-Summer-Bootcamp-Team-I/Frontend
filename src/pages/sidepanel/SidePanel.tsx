@@ -6,23 +6,6 @@ import bgSidePanel from '@src/assets/img/bg_sidepannel.svg';
 import Scrap from './Scrap';
 import Signup from './Signup';
 import Login from './Login';
-<<<<<<< HEAD
-import Modal from '@src/components/Modal';
-import axios from 'axios';
-import Timeline from './Timeline';
-
-const queryClient = new QueryClient();
-
-const SidePanel: React.FC = () => {
-  const [showModal, setShowModal] = useState(false);
-  const openModal = () => setShowModal(true);
-  const closeModal = () => setShowModal(false);
-  const outside = useRef<HTMLDivElement>(null);
-
-  const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (outside.current && outside.current === e.target) {
-      closeModal();
-=======
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
 const isAuthenticated = () => {
@@ -43,16 +26,11 @@ const SidePanel: React.FC = () => {
       return <Navigate to="/timeline" />;
     } else {
       return <Navigate to="/scrap" />;
->>>>>>> develop
     }
   };
 
   return (
-<<<<<<< HEAD
-    <QueryClientProvider client={queryClient}>
-=======
     <Router>
->>>>>>> develop
       <div
         className="flex justify-center w-screen h-screen bg-bottom bg-no-repeat bg-cover"
         style={{
@@ -60,12 +38,6 @@ const SidePanel: React.FC = () => {
         }}
       >
         <div className="flex flex-col items-center justify-center">
-<<<<<<< HEAD
-          <Timeline />
-        </div>
-      </div>
-    </QueryClientProvider>
-=======
           <Routes>
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
@@ -75,7 +47,6 @@ const SidePanel: React.FC = () => {
         </div>
       </div>
     </Router>
->>>>>>> develop
   );
 };
 
