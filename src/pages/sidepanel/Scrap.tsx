@@ -11,7 +11,7 @@ import logo from '@root/src/assets/img/Logo.svg';
 
 const fetchScrapItems = async () => {
   const userId = localStorage.getItem('user_id');
-  const response = await axios.get('http://localhost:8000/api/v1/scraps/', {
+  const response = await axios.get('http://localhost/api/v1/scraps/', {
     params: { user_id: userId },
   });
   console.log('userId:', userId); // user_id 확인
@@ -29,7 +29,7 @@ const fetchScrapItems = async () => {
 const postScrapItem = async (item: DragItem) => {
   const userId = localStorage.getItem('user_id');
   const response = await axios.post(
-    'http://localhost:8000/api/v1/scraps/',
+    'http://localhost/api/v1/scraps/',
     { url: item.url },
     { params: { user_id: userId } }, // 적절한 user_id로 변경
   );

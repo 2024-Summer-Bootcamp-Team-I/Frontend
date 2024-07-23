@@ -9,15 +9,15 @@ import Lottie from 'react-lottie-player';
 import loadingAnimation from '@src/assets/img/loading004.json';
 
 const fetchNewsData = async (newsId: string) => {
-  const response = await axios.get(`http://localhost:8000/api/v1/classifies/${newsId}`);
+  const response = await axios.get(`http://localhost/api/v1/classifies/A/${newsId}`);
   const targetArticle = response.data.target_article;
   const similarArticles = response.data.similar_articles || [];
   const oppositeArticles = response.data.opposite_articles || [];
 
   return {
     ...targetArticle,
-    similar_articles: similarArticles,
-    opposite_articles: oppositeArticles,
+    similarArticles,
+    oppositeArticles,
   };
 };
 
@@ -83,7 +83,7 @@ const MainTextA: React.FC = () => {
         <div className="w-[30rem] h-[12.5rem] 3xl:h-[15rem] 4xl:h-[20rem] rounded-[2.5rem] bg-white pl-10 py-8">
           <PerfectScrollbar className="w-full h-full">
             <p className="text-2xl underline underline-offset-8 text-[#106AAB] font-semibold pb-8">관련 기사</p>
-            {newsData.similar_articles.map((article, index) => (
+            {newsData.similarArticles.map((article, index) => (
               <p key={index} className="pr-10 text-base">
                 {index + 1}.{' '}
                 <a href={article.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
@@ -96,7 +96,7 @@ const MainTextA: React.FC = () => {
         <div className="w-[30rem] h-[12.5rem] 3xl:h-[15rem] 4xl:h-[20rem] rounded-[2.5rem] bg-white pl-10 py-8">
           <PerfectScrollbar className="w-full h-full">
             <p className="text-2xl underline underline-offset-8 text-[#C20A0A] font-semibold pb-8">반대 기사</p>
-            {newsData.opposite_articles.map((article, index) => (
+            {newsData.oppositeArticles.map((article, index) => (
               <p key={index} className="pr-10 text-base">
                 {index + 1}.{' '}
                 <a href={article.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">

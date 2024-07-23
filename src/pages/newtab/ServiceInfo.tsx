@@ -9,7 +9,7 @@ interface DataItem {
 }
 
 const getNewsCountAPI = async () => {
-  const response = await axios.get('http://localhost:8000/api/v1/newscount');
+  const response = await axios.get('http://localhost/api/v1/news/count');
   return response.data;
 };
 
