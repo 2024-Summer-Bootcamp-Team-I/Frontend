@@ -9,32 +9,36 @@ import Signup from './Signup';
 import Login from './Login';
 import Modal from '@src/components/Modal';
 import axios from 'axios';
+import Timeline from './Timeline';
+
+const queryClient = new QueryClient();
 
 const SidePanel: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
-
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
-  const outside = useRef();
+  const outside = useRef<HTMLDivElement>(null);
 
-  const handleOutsideClick = (e) => {
+  const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (outside.current && outside.current === e.target) {
       closeModal();
     }
   };
 
   return (
-    <div
-      className="flex justify-center w-screen h-screen bg-bottom bg-no-repeat bg-cover"
-      style={{
-        backgroundImage: `url(${bgSidePanel})`,
-      }}
-    >
-      <div className="flex flex-col items-center justify-center">
-        <Scrap />
+    <QueryClientProvider client={queryClient}>
+      <div
+        className="flex justify-center w-screen h-screen bg-bottom bg-no-repeat bg-cover"
+        style={{
+          backgroundImage: `url(${bgSidePanel})`,
+        }}
+      >
+        <div className="flex flex-col items-center justify-center">
+          <Timeline />
+        </div>
       </div>
-    </div>
+    </QueryClientProvider>
   );
 };
 
-export default withErrorBoundary(withSuspense(SidePanel, <div> Loading ... </div>), <div> Error Occur </div>);
+export default withErrorBoundary(withSuspense(SidePanel, <div>Loading ...</div>), <div>Error Occur</div>);
