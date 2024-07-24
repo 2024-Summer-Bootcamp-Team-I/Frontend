@@ -13,10 +13,12 @@ const fetchNewsData = async (newsId: string) => {
   const news = response.data.news;
   const score = response.data.score;
   const reason = response.data.reason;
+  const channel = response.data.channel_name;
   return {
     ...news,
     score,
     reason,
+    channel,
   };
 };
 
