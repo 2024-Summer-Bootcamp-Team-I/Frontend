@@ -8,6 +8,7 @@ import { Mousewheel, Scrollbar, EffectCoverflow, FreeMode } from 'swiper/modules
 import SavedNews from './SavedNews';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
+import { formatDate } from '@root/utils/formatDate';
 
 const fetchMyScrapItems = async () => {
   const userId = localStorage.getItem('user_id');
@@ -20,7 +21,7 @@ const fetchMyScrapItems = async () => {
     title: news.news.title,
     content: news.news.content,
     img: news.news.img,
-    publishedDate: news.news.published_date,
+    publishedDate: formatDate(news.news.published_date),
     channelName: news.channel_name,
     type: news.news.type,
   }));
