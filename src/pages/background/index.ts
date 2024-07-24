@@ -12,10 +12,15 @@ chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }).catch((error
 // 업데이트 될때마다 리스너 실행
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   console.log('Tab updated:', tab.url);
-  if (changeInfo.status === 'complete' && tab.url.includes('n.news.naver.com/mnews/article')) {
-    //url패턴이 일치하는지 확인
-    console.log('Sending message to content script');
-    chrome.tabs.sendMessage(tabId, { action: 'getArticleURL' });
+  if (changeInfo.status === 'complete' && tab.url) {
+    chrome.storage.local.set({ currentTabUrl: tab.url }).then(() => {
+      console.log('URL stored:', tab.url);
+    });
+    if (tab.url.includes('n.news.naver.com/mnews/article')) {
+      // url패턴이 일치하는지 확인
+      console.log('Sending message to content script');
+      chrome.tabs.sendMessage(tabId, { action: 'getArticleURL' });
+    }
   }
 });
 // { action: 'getArticleURL' } 메시지를 content로 보냄

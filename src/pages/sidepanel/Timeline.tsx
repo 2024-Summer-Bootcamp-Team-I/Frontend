@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import ShortcutIcon from '@src/assets/img/ShortcutsIcon.svg';
+import logo from '@root/src/assets/img/Logo.svg';
 
 interface ArticleData {
   title: string;
@@ -59,15 +59,16 @@ const Timeline: React.FC = () => {
     });
   }, []);
 
+  const handleButtonClick = () => {
+    chrome.tabs.create({ url: chrome.runtime.getURL('src/pages/newtab/index.html') });
+    window.close();
+  };
+
   // 로고 및 타임라인
   return (
     <div className="justify-center w-[30rem] h-[100vh] overflow-hidden">
-      <div className="flex h-[7.25rem] items-center justify-between">
-        <p className="mx-8 h-[3rem] text-[2rem]">LOGO</p>
-        <button className="flex mx-8 items-center justify-center w-[14rem] h-[3rem] bg-midnight text-white text-[1.25rem] rounded-full">
-          <p className="pr-[0.5rem]">저장한 기사 보러가기</p>
-          <img src={ShortcutIcon} alt="Shortcut Icon" />
-        </button>
+      <div className="flex h-[7.25rem] items-center justify-start">
+        <img src={logo} alt="Logo" onClick={handleButtonClick} className="h-[3rem] mx-8 cursor-pointer" />
       </div>
       {timelineData.map((item, index) => (
         <div key={index} className="ml-[1.75rem] relative flex items-start w-full">

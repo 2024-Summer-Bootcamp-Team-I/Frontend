@@ -39,7 +39,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     const articleUrl = window.location.href; // 현재 페이지의 URL을 articleUrl 변수에 저장
     console.log('Article URL:', articleUrl);
     // 서버에 POST 요청
-    fetch('http://localhost:8000/api/v1/newstimeline', {
+    fetch('http://localhost/api/v1/news/timeline', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -50,6 +50,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       .then((data) => {
         console.log('Response data:', data);
         chrome.storage.local.set({ articleData: data });
+        chrome.storage.local.set({ articleUrl: articleUrl });
         // 받은 데이터를 크롬의 로컬 저장소에 저장
         sendResponse({ success: true }); // success 메세지 보냄
       })
