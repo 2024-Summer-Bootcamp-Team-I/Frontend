@@ -8,6 +8,8 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import logo from '@root/src/assets/img/Logo.svg';
+import Lottie from 'react-lottie-player';
+import loadingAnimation from '@src/assets/img/loading004.json';
 
 const fetchScrapItems = async () => {
   const userId = localStorage.getItem('user_id');
@@ -131,7 +133,12 @@ const Scrap: React.FC = () => {
     };
   }, []);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading)
+    return (
+      <div>
+        <Lottie loop animationData={loadingAnimation} play style={{ width: 300, height: 300 }} />
+      </div>
+    );
   if (isError) return <p>Error: {error.message}</p>;
 
   return (

@@ -6,6 +6,8 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
+import Lottie from 'react-lottie-player';
+import loadingAnimation from '@src/assets/img/loading004.json';
 
 const fetchNewsData = async (newsId: string) => {
   const response = await axios.get(`http://localhost/api/v1/classifies/C/${newsId}`);
@@ -36,9 +38,12 @@ const MainTextC: React.FC = () => {
     enabled: !!newsId,
   });
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  if (isLoading)
+    return (
+      <div>
+        <Lottie loop animationData={loadingAnimation} play style={{ width: 300, height: 300 }} />
+      </div>
+    );
 
   if (isError) {
     return <div>Error: {(error as Error).message}</div>;

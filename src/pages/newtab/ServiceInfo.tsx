@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import WaveGraph from '@root/src/components/WaveGraph';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
+import Lottie from 'react-lottie-player';
+import loadingAnimation from '@src/assets/img/loading004.json';
 
 interface DataItem {
   news_count: number;
@@ -35,9 +37,12 @@ const ServiceInfo: React.FC = () => {
   }, [countData]);
 
   // 순서 중요. useEffect보다 앞서면 안됨
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  if (isLoading)
+    return (
+      <div>
+        <Lottie loop animationData={loadingAnimation} play style={{ width: 300, height: 300 }} />
+      </div>
+    );
 
   if (isError) {
     // 오류 객체를 Error 타입으로 단언
