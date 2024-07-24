@@ -80,8 +80,8 @@ const ServiceInfo: React.FC = () => {
 
   return (
     <div className="flex items-center justify-center">
-      <div className="flex items-center justify-center bg-white bg-opacity-10 rounded-[3.125rem] w-[85rem] h-[40rem] 3xl:w-[95rem] 3xl:h-[45rem] 4xl:w-[150rem] 4xl:h-[70rem] pl-[5rem] pr-32 pb-12 pt-24 ">
-        <div className="scale-[0.85] 3xl:scale-[1] 4xl:scale-[1.55]">
+      <div className="flex items-center justify-center backdrop-blur-md shadow-xl bg-white bg-opacity-10 rounded-[3.125rem] w-[86rem] h-[44.5rem] 3xl:w-[114rem] 3xl:h-[48.5rem] 4xl:w-[154rem] 4xl:h-[66rem] pl-[5rem] pr-32 pb-12 pt-24 ">
+        <div className="scale-[0.85] 3xl:scale-[1] 4xl:scale-[1.43]">
           <WaveGraph data={data} />
         </div>
         {/* <button onClick={() => console.log(data)}>배열 출력</button> */}

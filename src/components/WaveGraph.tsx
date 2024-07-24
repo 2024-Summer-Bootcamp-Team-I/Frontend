@@ -224,11 +224,14 @@ const WaveGraph = ({ data }) => {
         <div className="flex flex-col">
           <div className="w-[87rem] h-[40rem] bg-[#fff0d5] rounded-[2.5rem]">
             <div
-              className="fixed top-4 right-6 w-[7.5rem] h-8 flex justify-between items-center hover:text-black z-2"
+              className="fixed top-4 right-6 4xl:w-[5.5rem] w-[7rem] h-8 flex justify-between items-center hover:text-black z-2"
               // className="fixed top-4 right-6 w-[7.5rem] h-8 flex justify-between items-center duration-200 hover:filter hover:invert transition-filter z-2"
             >
-              <p className="text-[1.25rem] text-[#505050] font-bold">수치정보</p>
-              <button onClick={HandleOpenModal} className="duration-200 hover:filter hover:invert transition-filter">
+              <p className="text-[1.25rem] 4xl:text-base text-[#505050] font-bold">수치정보</p>
+              <button
+                onClick={HandleOpenModal}
+                className="4xl:w-[1.25rem] 4xl:h-[1.25rem] duration-200 hover:filter hover:invert transition-filter"
+              >
                 {Modal ? <img src={xbutton} /> : <img src={InfoIcon} />}
               </button>
             </div>
