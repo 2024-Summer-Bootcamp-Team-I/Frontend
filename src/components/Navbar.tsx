@@ -15,7 +15,7 @@ const Navbar = () => {
         <div className="flex space-x-[0.125rem]">
           <Link to="/relatednews">
             <button
-              className={`w-[10rem] h-[3rem] text-center rounded-full content-center ${currentPage === '/relatednews' ? 'bg-midnight text-white shadow-inner' : ''}`}
+              className={`w-[11.2rem] h-[3rem] text-center rounded-full content-center ${currentPage === '/relatednews' ? 'bg-midnight text-white shadow-inner' : ''}`}
             >
               판별된 기사
             </button>
@@ -24,12 +24,12 @@ const Navbar = () => {
             <button
               className={`w-[10rem] h-[3rem] text-center rounded-full content-center ${currentPage === '/mynews' ? 'bg-midnight text-white shadow-inner' : ''}`}
             >
-              나의 기사
+              스크랩
             </button>
           </Link>
           <Link to="/serviceinfo">
             <button
-              className={`w-[10rem] h-[3rem] text-center rounded-full content-center ${currentPage === '/serviceinfo' ? 'bg-midnight text-white shadow-inner' : ''}`}
+              className={`w-[10.4rem] h-[3rem] text-center rounded-full content-center ${currentPage === '/serviceinfo' ? 'bg-midnight text-white shadow-inner' : ''}`}
             >
               판별 통계
             </button>
