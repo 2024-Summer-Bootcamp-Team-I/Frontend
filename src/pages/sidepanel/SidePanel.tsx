@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '@src/global.css';
 import withSuspense from '@src/shared/hoc/withSuspense';
 import withErrorBoundary from '@src/shared/hoc/withErrorBoundary';
@@ -6,7 +6,8 @@ import bgSidePanel from '@src/assets/img/bg_sidepannel.svg';
 import Scrap from './Scrap';
 import Signup from './Signup';
 import Login from './Login';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
+import Timeline from './Timeline';
 
 const isAuthenticated = () => {
   // 인증 여부를 확인하는 로직
@@ -17,18 +18,29 @@ const PrivateRoute = ({ element: Element, ...rest }) => {
   return isAuthenticated() ? <Element {...rest} /> : <Navigate to="/login" />;
 };
 
+const DefaultRoute: React.FC = () => {
+  const [defaultRoute, setDefaultRoute] = useState<React.ReactElement | null>(null);
+
+  useEffect(() => {
+    chrome.storage.local.get(['currentTabUrl'], (result) => {
+      const currentTabUrl = result.currentTabUrl || '';
+      console.log('currentTabUrl:', currentTabUrl);
+
+      if (currentTabUrl.includes('/section')) {
+        setDefaultRoute(<Navigate to="/scrap" />);
+      } else if (currentTabUrl.includes('/mnews/article')) {
+        setDefaultRoute(<Navigate to="/timeline" />);
+      } else {
+        setDefaultRoute(<Navigate to="/scrap" />);
+      }
+    });
+  }, []);
+
+  return defaultRoute;
+};
+
 const SidePanel: React.FC = () => {
   // 기본 경로 설정
-  const getDefaultRoute = () => {
-    if (location.pathname.startsWith('/section')) {
-      return <Navigate to="/scrap" />;
-    } else if (location.pathname.startsWith('/mnews/article')) {
-      return <Navigate to="/timeline" />;
-    } else {
-      return <Navigate to="/scrap" />;
-    }
-  };
-
   return (
     <Router>
       <div
@@ -42,7 +54,8 @@ const SidePanel: React.FC = () => {
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/scrap" element={<Scrap />} />
-            <Route path="*" element={getDefaultRoute()} />
+            <Route path="/timeline" element={<Timeline />} />
+            <Route path="*" element={<DefaultRoute />} />
           </Routes>
         </div>
       </div>
