@@ -80,21 +80,27 @@ const Carousel: React.FC = () => {
   const sortedScrapItems = [...myScrapItems].reverse();
 
   return (
-    <div className="flex overflow-hidden justify-center items-center mt-[-4rem] 3xl:scale-100 4xl:scale-125">
-      <div className="relative w-[66.75rem] h-[47rem] 3xl:w-[80rem] 4xl:w-[100rem] 4xl:h-[50rem] ">
+    <div className="flex overflow-hidden justify-center items-center mt-[-4rem] scale-95 3xl:scale-100 4xl:scale-125">
+      <div className="relative mt-[4rem] w-[66.75rem] h-[47rem] 3xl:w-[80rem] 4xl:w-[100rem] 4xl:h-[50rem] ">
         <style>{`
           .swiper-scrollbar {
-            background: transparent;
+            background: transparent !important;
+            right: 0.375rem !important; 
+            top: 50% !important; 
+            transform: translateY(-50%) !important; 
+            height: 80% !important; 
           }
           .swiper-scrollbar-drag {
-            background: black;
+            background: black !important;
+            height: 6.25rem !important; 
+            width: 0.5rem !important;  
           }
           .swiper-slide {
             display: flex;
             justify-content: center;
             align-items: center;
             height: auto;
-            width: 100%
+            width: 100%;
             transition: opacity 0.5s ease, transform 0.5s ease;
           }
         `}</style>
@@ -113,7 +119,7 @@ const Carousel: React.FC = () => {
           }}
           slidesPerView={5}
           centeredSlides={true}
-          scrollbar={{ draggable: true }}
+          scrollbar={{ draggable: true, dragSize: 100 }} /* 드래그 가능한 영역 크기 조정 */
           simulateTouch={false}
           freeMode={{ enabled: false }}
           speed={300}
