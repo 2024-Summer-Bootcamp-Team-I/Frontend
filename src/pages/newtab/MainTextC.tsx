@@ -6,6 +6,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
+import { formatDate } from '@root/utils/formatDate';
 
 const fetchNewsData = async (newsId: string) => {
   const response = await axios.get(`http://localhost/api/v1/classifies/C/${newsId}`);
@@ -55,7 +56,7 @@ const MainTextC: React.FC = () => {
             </div>
             <div className="flex items-center ml-5">
               <img src={calendarIcon} className="w-[1rem] h-[1rem]" />
-              <span className="ml-2 text-base text-[#505050]">{newsData.published_date}</span>
+              <span className="ml-2 text-base text-[#505050]">{formatDate(newsData.published_date)}</span>
             </div>
           </div>
           <div className="pr-[3rem] 4xl:pr-[6rem]">
