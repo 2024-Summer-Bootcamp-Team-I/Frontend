@@ -51,7 +51,7 @@ const RelatedNews: React.FC = () => {
 
   return (
     <div className="flex justify-center">
-      <div className="flex flex-col items-center justify-center w-full h-full bg-opacity-10 bg-white rounded-[3.125rem] shadow-md p-8 3xl:px-10 4xl:p-16 mx-[3rem]">
+      <div className="flex flex-col items-center justify-center w-full h-full bg-opacity-10 backdrop-blur-md shadow-xl bg-white rounded-[3.125rem] p-8 3xl:px-10 4xl:p-16 mx-[3rem]">
         <div className="grid grid-cols-3 gap-x-8 gap-y-4 3xl:gap-y-8">
           {news.map((newsItem) => (
             <CardNews key={newsItem.newsId} article={newsItem} />

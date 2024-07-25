@@ -3,6 +3,7 @@ import tvIcon from '@src/assets/img/TV.svg';
 import calendarIcon from '@assets/img/Calendar.svg';
 import LiquidFillGauge from './LiquidFillGauge';
 import { useNavigate } from 'react-router-dom';
+import { formatDate } from '@root/utils/formatDate';
 
 type CardNewsProps = {
   article: {
@@ -43,7 +44,7 @@ const CardNews: React.FC<CardNewsProps> = ({ article }) => {
             </div>
             <div className="flex items-center ml-5">
               <img src={calendarIcon} className="w-[0.75rem] h-[0.75rem]" />
-              <span className="ml-2 text-[0.75rem] text-[#505050]">{article.publishedDate}</span>
+              <span className="ml-2 text-[0.75rem] text-[#505050]">{formatDate(article.publishedDate)}</span>
             </div>
           </div>
         </div>

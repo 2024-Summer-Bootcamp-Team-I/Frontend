@@ -4,6 +4,7 @@ import tvIcon from '@src/assets/img/TV.svg';
 import calendarIcon from '@src/assets/img/Calendar.svg';
 import TrashIcon from '@src/assets/img/TrashIcon.svg';
 import axios from 'axios';
+import { formatDate } from '@root/utils/formatDate';
 
 type ScrapBoardProps = {
   item: ScrapItem;
@@ -49,13 +50,13 @@ const ScrapBoard: React.FC<ScrapBoardProps> = ({ item, onDelete }) => {
           <img src={TrashIcon} className="w-5 h-5 mt-1 ml-3 cursor-pointer" alt="Delete" onClick={handleDelete} />
         </div>
         <div className="flex items-end justify-end m-1">
-          <div className="flex items-center ml-5">
+          <div className="flex items-center">
             <img src={tvIcon} className="w-[0.75rem] h-[0.75rem]" />
             <span className="ml-2 text-[0.75rem] text-[#505050]">{item.channelName}</span>
           </div>
           <div className="flex items-center ml-5">
             <img src={calendarIcon} className="w-[0.75rem] h-[0.75rem]" />
-            <span className="ml-2 text-[0.75rem] text-[#505050]">{item.publishedDate}</span>
+            <span className="ml-2 text-[0.75rem] text-[#505050]">{formatDate(item.publishedDate)}</span>
           </div>
         </div>
       </div>
