@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import logo from '@root/src/assets/img/Logo.svg';
+import TimelineIcon from '@src/assets/img/TimelineIcon.svg';
+import line from '@src/assets/img/Line1.svg';
 
 interface ArticleData {
   title: string;
@@ -70,8 +72,23 @@ const Timeline: React.FC = () => {
       <div className="flex h-[7.25rem] items-center justify-start">
         <img src={logo} alt="Logo" onClick={handleButtonClick} className="h-[3rem] mx-8 cursor-pointer" />
       </div>
+      <div className="text-midnight">
+        <div className="px-[2rem] flex items-center">
+          <img src={TimelineIcon} alt="Scrap Icon" />
+          <p className="ml-1 font-extrabold text-[1.5rem]">타임라인</p>
+        </div>
+
+        <p className="px-[2rem] py-[0.75rem] text-[1.25rem]">
+          현재 기사와 관련된 사건들을 일자별로 나열한
+          <br />
+          타임라인입니다.
+        </p>
+      </div>
+      <div className="px-8 pt-[1.25rem] pb-[0.75rem]">
+        <img src={line} alt="Line" />
+      </div>
       {timelineData.map((item, index) => (
-        <div key={index} className="ml-[1.75rem] relative flex items-start w-full">
+        <div key={index} className="ml-[2rem] mt-[1.75rem] relative flex items-start w-full">
           {/* 흰색 세로선 */}
           <div className="absolute left-[0.625rem] rounded-full top-0 w-[0.175rem] h-[101%] bg-white z-0"></div>
           {/* 파란색 원 */}
@@ -80,8 +97,8 @@ const Timeline: React.FC = () => {
               {item.date}
             </span>
           </div>
-          <div className="mt-[3rem] ml-[1.5rem] w-[80%] text-base text-md text-white">
-            <ul className="list-disc">
+          <div className="mt-[3rem] ml-[1.25rem] w-[80%] text-base text-md text-white">
+            <ul className="list-disc mt-[1rem]">
               {item.articles.map((article, articleIndex) => (
                 <li key={articleIndex} className="mt-2">
                   <a href={article.url} target="_blank" rel="noopener noreferrer">
