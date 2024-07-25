@@ -3,8 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import Pagination from '@mui/material/Pagination';
 import CardNews from '@root/src/components/CardNews';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Lottie from 'react-lottie-player';
+import loadingAnimation from '@src/assets/img/loading004.json';
 
 const itemsPerPage = 9; // 페이지당 항목의 개수를 9로 설정
 
@@ -28,7 +28,12 @@ const RelatedNews: React.FC = () => {
     setPage(value);
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading)
+    return (
+      <div>
+        <Lottie loop animationData={loadingAnimation} play style={{ width: 300, height: 300 }} />
+      </div>
+    );
   if (isError) return <p>Error: {error.message}</p>;
 
   // 빈 카드를 계산하는 부분

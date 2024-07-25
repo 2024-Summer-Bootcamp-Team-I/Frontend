@@ -8,7 +8,10 @@ import { Mousewheel, Scrollbar, EffectCoverflow, FreeMode } from 'swiper/modules
 import SavedNews from './SavedNews';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
+import Lottie from 'react-lottie-player';
+import loadingAnimation from '@src/assets/img/loading004.json';
 import { formatDate } from '@root/utils/formatDate';
+
 
 const fetchMyScrapItems = async () => {
   const userId = localStorage.getItem('user_id');
@@ -75,7 +78,12 @@ const Carousel: React.FC = () => {
     // 슬라이드 클릭 동작
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading)
+    return (
+      <div>
+        <Lottie loop animationData={loadingAnimation} play style={{ width: 300, height: 300 }} />
+      </div>
+    );
   if (isError) return <p>Error: {error.message}</p>;
 
   const sortedScrapItems = [...myScrapItems].reverse();
