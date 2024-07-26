@@ -8,7 +8,7 @@ const Navbar = () => {
   const currentPage = location.pathname;
 
   return (
-    <div className="flex justify-between pt-[2.25rem]">
+    <div className="font-pretendardFontBold flex justify-between pt-[2.25rem]">
       <div className="flex text-2xl place-items-center">
         <img src={logo} alt="Logo" className="px-[3rem] h-[3rem] cursor-pointer" />
         <div className="flex space-x-[0.125rem]">

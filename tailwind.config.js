@@ -10,6 +10,10 @@ export default {
         '3xl': { min: '1920px' },
         '4xl': { min: '2560px' },
       },
+      fontFamily: {
+        pretendardFont: ['Pretendard-Regular', 'Pretendard-Regular'],
+        pretendardFontBold: ['Pretendard-Bold', 'Pretendard-Bold'],
+      },
     },
   },
   plugins: [],

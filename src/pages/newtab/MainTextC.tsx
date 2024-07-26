@@ -55,7 +55,7 @@ const MainTextC: React.FC = () => {
     <div className="flex items-center justify-center space-x-[2rem] 4xl:space-x-[4rem]">
       <div className="w-[54rem] 3xl:w-[70rem] 4xl:w-[80rem] h-[40rem] 3xl:h-[48rem] 4xl:h-[65rem] rounded-[2.5rem] bg-white p-[3rem] 4xl:p-[6rem] pr-0 4xl:pr-0 ">
         <PerfectScrollbar className="w-full h-full">
-          <p className="text-2xl font-semibold pr-[3rem] 4xl:pr-[6rem]">{newsData.title}</p>
+          <p className="text-2xl font-bold pr-[3rem] 4xl:pr-[6rem]">{newsData.title}</p>
           <div className="flex items-end justify-end mt-4 mb-6 pr-[3rem] 4xl:pr-[6rem]">
             <div className="flex items-center ml-5">
               <img src={tvIcon} className="w-[1rem] h-[1rem]" />

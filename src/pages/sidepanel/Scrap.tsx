@@ -150,7 +150,7 @@ const Scrap: React.FC = () => {
       <div className="text-midnight">
         <div className="px-[2rem] flex items-center">
           <img src={ScrapIcon} alt="Scrap Icon" />
-          <p className="ml-1 font-extrabold text-[1.5rem]">스크랩</p>
+          <p className="font-pretendardFontBold ml-1 font-extrabold text-[1.5rem]">스크랩</p>
         </div>
 
         <p className="px-[2rem] py-[0.75rem] text-[1.25rem]">
@@ -163,7 +163,7 @@ const Scrap: React.FC = () => {
       </div>
       <div className="m-0">
         <div className="flex justify-center items-center w-[26rem] h-[7.5rem] mx-[2rem] my-[1.25rem] border-dashed border-2 border-midnight rounded-[1.25rem]">
-          <p className="text-[1.5rem] font-semibold text-midnight">DROP</p>
+          <p className=" text-[1.5rem] font-semibold text-midnight">DROP</p>
         </div>
         <div className="overflow-hidden" style={{ height: scrollHeight }}>
           <PerfectScrollbar className="w-full h-full">
