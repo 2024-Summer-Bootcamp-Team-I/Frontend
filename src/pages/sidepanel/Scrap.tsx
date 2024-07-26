@@ -65,6 +65,7 @@ const Scrap: React.FC = () => {
     isError,
     error,
   } = useQuery<ScrapItem[], Error>({ queryKey: ['scrapItems'], queryFn: fetchScrapItems });
+
   const mutation = useMutation<
     { userId: number; newsId: any; title: any; img: any; publishedDate: any; channelName: any; type: any },
     Error,

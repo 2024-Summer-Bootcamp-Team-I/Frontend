@@ -75,15 +75,15 @@ const MainTextC: React.FC = () => {
           ></p>
         </PerfectScrollbar>
       </div>
-      <div className="flex flex-col 3xl:space-y-[2rem] 4xl:space-y-[4rem]">
-        <div className="hidden 3xl:block 3xl:h-[13rem] 4xl:h-[18rem] rounded-[2.5rem] bg-white pl-10 py-8">
+      <div className="flex flex-col space-y-[2rem] 4xl:space-y-[4rem]">
+        <div className="w-[30rem] h-[9rem] 3xl:h-[14rem] 4xl:h-[17rem] rounded-[2.5rem] bg-white pl-10 py-8">
           <PerfectScrollbar className="w-full h-full">
             <p className="text-2xl underline underline-offset-8 text-[#078A0C] font-semibold pb-8">뉴스 요약</p>
             <p className="pr-10 text-base">{newsData.summarize}</p>
           </PerfectScrollbar>
         </div>
         <TrustScore newsId={newsData.news_id} score={newsData.score} />
-        <div className="w-[30rem] h-[20rem] 3xl:h-[13rem] 4xl:h-[21rem] rounded-[2.5rem] bg-white pl-10 py-8 mt-[2rem] 3xl:mt-0">
+        <div className="w-[30rem] h-[9rem] 3xl:h-[12rem] 4xl:h-[21rem] rounded-[2.5rem] bg-white pl-10 py-8 mt-[2rem] 3xl:mt-0">
           <PerfectScrollbar className="w-full h-full">
             <p className="text-2xl underline underline-offset-8 text-[#106AAB] font-semibold pb-8">판단 근거 요약</p>
             <p className="pr-10 text-base">{newsData.reason}</p>

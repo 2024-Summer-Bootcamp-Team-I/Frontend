@@ -36,7 +36,7 @@ const WaveGraph = ({ data }) => {
     data = data.map((d) => ({ date: parseDate(d.created_at), value: d.news_count }));
 
     // 파란 그래프와 하얀 그래프의 높이 차가 점수에 따라 달라지게 구현
-    const data2 = data.map((d) => ({ date: d.date, value: 15 + d.value + 0.1 * d.value }));
+    const data2 = data.map((d) => ({ date: d.date, value: 8 + d.value + 0.1 * d.value }));
 
     const chart = svg.append('g');
 
@@ -52,7 +52,7 @@ const WaveGraph = ({ data }) => {
       .range([0, 1392]);
     // .padding(0.5); // 포인트 간의 간격 조절(고정값이라 바꾸면 양옆이 비거나 초과할 수 있음)
 
-    const y = d3.scaleLinear().domain([0, 370]).range([640, 0]); // 이 부분을 조절하면 위쪽에 여백을 남길 수 있음(신뢰도가 100일때 부자연스럽게 위에 닿는 것 방지)
+    const y = d3.scaleLinear().domain([0, 110]).range([640, 0]); // 이 부분을 조절하면 위쪽에 여백을 남길 수 있음(신뢰도가 100일때 부자연스럽게 위에 닿는 것 방지)
     // 물론 range값이 축에도 영향을 주니 주의
 
     // const xAxis = d3.axisBottom(x).ticks(data.length).tickFormat(formatDate);;
@@ -93,7 +93,7 @@ const WaveGraph = ({ data }) => {
       .style('fill', 'transparent'); // 마지막 날짜 스타일 적용
 
     // y축 설정
-    const yTickValues = d3.range(0, 370, 50);
+    const yTickValues = d3.range(0, 110, 20);
     const yAxis = d3.axisLeft(y).tickValues(yTickValues);
     d3.select(yAxisRef.current)
       .call(yAxis)
