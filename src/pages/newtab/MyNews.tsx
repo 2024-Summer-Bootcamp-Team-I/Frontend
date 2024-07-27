@@ -1,11 +1,28 @@
+import React, { useState } from 'react';
 import Carousel from '@root/src/components/Carousel';
-import React from 'react';
+import SearchBar from '@root/src/components/SearchBar';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-const MyNews = () => {
+const queryClient = new QueryClient();
+
+const MyNews: React.FC = () => {
+  const [searchQuery, setSearchQuery] = useState<string>('');
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+  };
+
   return (
-    <div className="flex mx-10">
-      <Carousel />
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div className="relative w-screen h-screen flex items-center justify-center">
+        <div className="absolute top-[-3rem] right-0">
+          <SearchBar onSearch={handleSearch} />
+        </div>
+        <div className="mt-[-3rem] ml">
+          <Carousel searchQuery={searchQuery} />
+        </div>
+      </div>
+    </QueryClientProvider>
   );
 };
 

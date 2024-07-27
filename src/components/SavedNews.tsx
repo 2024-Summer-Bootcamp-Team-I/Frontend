@@ -5,6 +5,17 @@ import calendarIcon from '@assets/img/Calendar.svg';
 import { useNavigate } from 'react-router-dom';
 import typeCmark from '@src/assets/img/typeCmark.svg';
 
+interface MyScrapItem {
+  userId: string;
+  newsId: string;
+  title: string;
+  content: string;
+  img: string;
+  publishedDate: string;
+  channelName: string;
+  type: string;
+}
+
 type SavedNewsProps = {
   item: MyScrapItem;
 };
@@ -41,7 +52,7 @@ const SavedNews: React.FC<SavedNewsProps> = ({ item }) => {
           </div>
         )}
         <img
-          src={item.img || articleEx}
+          src={item.img || articleEx} // 기본 이미지 설정
           alt={item.title}
           className="w-[12.5rem] h-[12.5rem] ml-[1.25rem] my-[1.25rem] rounded-[2.5rem]"
         />
@@ -60,7 +71,7 @@ const SavedNews: React.FC<SavedNewsProps> = ({ item }) => {
             {item.title}
           </p>
           <p
-            className="pt-[2rem] text-[1rem] "
+            className="pt-[2rem] text-[1rem]"
             style={{
               display: '-webkit-box',
               WebkitBoxOrient: 'vertical',
