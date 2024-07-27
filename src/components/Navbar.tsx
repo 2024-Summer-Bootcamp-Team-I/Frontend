@@ -30,7 +30,7 @@ const Navbar = () => {
             <button
               className={`w-[10.4rem] h-[3rem] text-center rounded-full content-center cursor-pointer ${currentPage === '/serviceinfo' ? 'bg-midnight text-white shadow-inner' : ''}`}
             >
-              판별 통계
+              분석 통계
             </button>
           </Link>
         </div>

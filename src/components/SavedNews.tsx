@@ -35,7 +35,7 @@ const SavedNews: React.FC<SavedNewsProps> = ({ item }) => {
             {isTooltipVisible && (
               <div className="absolute left-1/2 transform -translate-x-1/2 px-4 py-2 text-sm text-gray-800 bg-white rounded-xl top-[-3.5rem] whitespace-nowrap">
                 판별된 기사입니다.
-                <div className="absolute bottom-[-0.5rem] left-1/2 transform -translate-x-1/2 w-0 h-0 border-t-8 border-t-white border-r-8 border-r-transparent border-l-8 border-l-transparent"></div>
+                <div className="absolute bottom-[-0.4rem] left-1/2 transform -translate-x-1/2 w-0 h-0 border-t-8 border-t-white border-r-8 border-r-transparent border-l-8 border-l-transparent"></div>
               </div>
             )}
           </div>
