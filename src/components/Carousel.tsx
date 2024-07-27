@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/mousewheel';
@@ -12,34 +12,61 @@ import Lottie from 'react-lottie-player';
 import loadingAnimation from '@src/assets/img/loading004.json';
 import { formatDate } from '@root/utils/formatDate';
 
-const fetchMyScrapItems = async () => {
+interface MyScrapItem {
+  userId: string;
+  newsId: string;
+  title: string;
+  content: string;
+  img: string;
+  publishedDate: string;
+  channelName: string;
+  type: string;
+}
+
+// fetchMyScrapItems 함수
+const fetchMyScrapItems = async (query: string): Promise<MyScrapItem[]> => {
   const userId = localStorage.getItem('user_id');
   const response = await axios.get('http://localhost/api/v1/scraps/', {
     params: { user_id: userId },
   });
-  return response.data.map((news: any) => ({
-    userId: news.user_id,
-    newsId: news.news.news_id,
-    title: news.news.title,
-    content: news.news.content,
-    img: news.news.img,
-    publishedDate: formatDate(news.news.published_date),
-    channelName: news.channel_name,
-    type: news.news.type,
-  }));
+  return response.data
+    .map((news: any) => ({
+      userId: news.user_id,
+      newsId: news.news.news_id,
+      title: news.news.title,
+      content: news.news.content,
+      img: news.news.img,
+      publishedDate: formatDate(news.news.published_date),
+      channelName: news.channel_name,
+      type: news.news.type,
+    }))
+    .filter((item) => {
+      const lowerCaseQuery = query.toLowerCase();
+      return (
+        item.title.toLowerCase().includes(lowerCaseQuery) || item.channelName.toLowerCase().includes(lowerCaseQuery)
+      );
+    });
 };
 
-const Carousel: React.FC = () => {
+// CarouselProps 인터페이스 정의
+interface CarouselProps {
+  searchQuery: string;
+}
+
+const Carousel: React.FC<CarouselProps> = ({ searchQuery }) => {
+  // useQuery훅을 사용하여 데이터를 가져옴
   const {
     data: myScrapItems,
     isLoading,
     isError,
     error,
-  } = useQuery<MyScrapItem[], Error>({ queryKey: ['scrapItems'], queryFn: fetchMyScrapItems });
+  } = useQuery<MyScrapItem[], Error>({
+    queryKey: ['scrapItems', searchQuery],
+    queryFn: () => fetchMyScrapItems(searchQuery),
+  });
 
   const swiperRef = useRef(null);
 
-  // 페이지 스크롤 방지
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
     document.documentElement.style.overflow = 'hidden';
@@ -51,10 +78,9 @@ const Carousel: React.FC = () => {
     };
   }, []);
 
-  // 슬라이드 변경 시 슬라이드 투명도 및 크기 업데이트
-  const updateSlideOpacityAndSize = (swiper) => {
+  const updateSlideOpacityAndSize = (swiper: any) => {
     const slides = swiper.slides;
-    slides.forEach((slide, index) => {
+    slides.forEach((slide: any, index: number) => {
       slide.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
       if (index === swiper.activeIndex) {
         slide.style.opacity = '1';
@@ -72,7 +98,7 @@ const Carousel: React.FC = () => {
     });
   };
 
-  const handleSlideClick = (index) => {
+  const handleSlideClick = (index: number) => {
     console.log(`Slide ${index} clicked`);
     // 슬라이드 클릭 동작
   };
@@ -88,7 +114,8 @@ const Carousel: React.FC = () => {
   return (
     <div className="flex items-center justify-center overflow-hidden scale-95 3xl:scale-100 4xl:scale-125">
       <div className="relative w-[66.75rem] h-[47rem] 3xl:w-[80rem] 4xl:w-[100rem] 4xl:h-[50rem] ">
-        <style>{`
+        <style>
+          {`
           .swiper-scrollbar {
             background: transparent !important;
             right: 0.375rem !important; 
@@ -109,7 +136,8 @@ const Carousel: React.FC = () => {
             width: 100%;
             transition: opacity 0.5s ease, transform 0.5s ease;
           }
-        `}</style>
+        `}
+        </style>
         <Swiper
           ref={swiperRef}
           direction="vertical"
@@ -125,23 +153,24 @@ const Carousel: React.FC = () => {
           }}
           slidesPerView={5}
           centeredSlides={true}
-          scrollbar={{ draggable: true, hide: true, dragSize: 100 }} /* hide 속성 추가 */
-          simulateTouch={true} /* simulateTouch를 true로 설정 */
+          scrollbar={{ draggable: true, hide: true, dragSize: 100 }}
+          simulateTouch={true}
           freeMode={{ enabled: false }}
           speed={300}
           className="h-full"
           onSlideChange={updateSlideOpacityAndSize}
           onSwiper={updateSlideOpacityAndSize}
         >
-          {myScrapItems.map((item, index) => (
-            <SwiperSlide
-              key={item.newsId}
-              className="flex items-center justify-center"
-              onClick={() => handleSlideClick(index)}
-            >
-              <SavedNews item={item} />
-            </SwiperSlide>
-          ))}
+          {myScrapItems &&
+            myScrapItems.map((item, index) => (
+              <SwiperSlide
+                key={item.newsId}
+                className="flex items-center justify-center"
+                onClick={() => handleSlideClick(index)}
+              >
+                <SavedNews item={item} /> {/* SavedNews 컴포넌트에 MyScrapItem 전달 */}
+              </SwiperSlide>
+            ))}
         </Swiper>
       </div>
     </div>
