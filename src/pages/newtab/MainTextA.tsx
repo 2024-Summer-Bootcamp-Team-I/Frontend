@@ -10,7 +10,7 @@ import loadingAnimation from '@src/assets/img/loading004.json';
 import { formatDate } from '@root/utils/formatDate';
 
 const fetchNewsData = async (newsId: string) => {
-  const response = await axios.get(`http://localhost/api/v1/classifies/A/${newsId}`);
+  const response = await axios.get(`http://localhost/api/v1/news/A/${newsId}`);
   const targetArticle = response.data.target_article;
   const similarArticles = response.data.similar_articles || [];
   const oppositeArticles = response.data.opposite_articles || [];

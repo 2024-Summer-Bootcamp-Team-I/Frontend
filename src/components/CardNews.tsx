@@ -26,7 +26,7 @@ const CardNews: React.FC<CardNewsProps> = ({ article }) => {
   return (
     <div
       onClick={handleClick}
-      className="w-[26rem] 3xl:w-[35rem] 4xl:w-[47.375rem] h-[11.5rem] 3xl:h-[12rem] 4xl:h-[16rem] bg-white rounded-[1.875rem] shadow-md cursor-pointer"
+      className="w-[26rem] 3xl:w-[35rem] 4xl:w-[47.375rem] h-[11.5rem] 3xl:h-[12rem] 4xl:h-[16rem] bg-white rounded-[1.875rem] shadow-md cursor-pointer font-pretendardFont"
     >
       <img
         src={article.img}

@@ -18,7 +18,7 @@ const App = () => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       const tab = tabs[0];
       const isNaverNews =
-        tab.url?.startsWith('https://news.naver.com/section/') ||
+        tab.url?.startsWith('https://news.naver.com/section/102') ||
         tab.url?.startsWith('https://n.news.naver.com/mnews/article/');
       if (!isNaverNews) {
         window.close(); // Close the side panel if not on allowed Naver News pages
@@ -29,7 +29,9 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <DndProvider backend={HTML5Backend}>
-        <SidePanel />
+        <div className="font-pretendardFont">
+          <SidePanel />
+        </div>
       </DndProvider>
       <ReactQueryDevtools initialIsOpen={true} />
     </QueryClientProvider>

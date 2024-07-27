@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/mousewheel';
@@ -11,7 +11,6 @@ import { useQuery } from '@tanstack/react-query';
 import Lottie from 'react-lottie-player';
 import loadingAnimation from '@src/assets/img/loading004.json';
 import { formatDate } from '@root/utils/formatDate';
-
 
 const fetchMyScrapItems = async () => {
   const userId = localStorage.getItem('user_id');
@@ -86,10 +85,8 @@ const Carousel: React.FC = () => {
     );
   if (isError) return <p>Error: {error.message}</p>;
 
-  const sortedScrapItems = [...myScrapItems].reverse();
-
   return (
-    <div className="flex overflow-hidden justify-center items-center scale-95 3xl:scale-100 4xl:scale-125">
+    <div className="flex items-center justify-center overflow-hidden scale-95 3xl:scale-100 4xl:scale-125">
       <div className="relative w-[66.75rem] h-[47rem] 3xl:w-[80rem] 4xl:w-[100rem] 4xl:h-[50rem] ">
         <style>{`
           .swiper-scrollbar {
@@ -136,7 +133,7 @@ const Carousel: React.FC = () => {
           onSlideChange={updateSlideOpacityAndSize}
           onSwiper={updateSlideOpacityAndSize}
         >
-          {sortedScrapItems.map((item, index) => (
+          {myScrapItems.map((item, index) => (
             <SwiperSlide
               key={item.newsId}
               className="flex items-center justify-center"
