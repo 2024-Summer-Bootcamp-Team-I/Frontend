@@ -26,7 +26,7 @@ interface MyScrapItem {
 // fetchMyScrapItems 함수
 const fetchMyScrapItems = async (query: string): Promise<MyScrapItem[]> => {
   const userId = localStorage.getItem('user_id');
-  const response = await axios.get('http://localhost/api/v1/scraps/', {
+  const response = await axios.get('https://fakenew.site/api/v1/scraps/', {
     params: { user_id: userId },
   });
   return response.data
