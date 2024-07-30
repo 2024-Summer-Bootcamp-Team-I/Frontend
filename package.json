@@ -22,7 +22,7 @@
     "lint:fix": "yarn lint --fix",
     "prepare": "husky install"
   },
-  "proxy": "http://localhost:8000",
+  "proxy": "https://fakenew.site",
   "type": "module",
   "dependencies": {
     "@emotion/react": "^11.13.0",

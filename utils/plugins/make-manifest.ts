@@ -14,10 +14,6 @@ const manifestFile = resolve(rootDir, 'manifest.js');
 
 const getManifestWithCacheBurst = (): Promise<{ default: chrome.runtime.ManifestV3 }> => {
   const withCacheBurst = (path: string) => `${path}?${Date.now().toString()}`;
-  /**
-   * In Windows, import() doesn't work without file:// protocol.
-   * So, we need to convert path to file:// protocol. (url.pathToFileURL)
-   */
   if (process.platform === 'win32') {
     return import(withCacheBurst(url.pathToFileURL(manifestFile).href));
   }
@@ -31,9 +27,10 @@ export default function makeManifest(config?: { getCacheInvalidationKey?: () => 
     }
     const manifestPath = resolve(to, 'manifest.json');
     if (cacheKey) {
-      // Naming change for cache invalidation
-      manifest.content_scripts.forEach(script => {
-        script.css &&= script.css.map(css => css.replace('<KEY>', cacheKey));
+      manifest.content_scripts.forEach((script) => {
+        if (script.css) {
+          script.css = script.css.map((css) => css.replace('<KEY>', cacheKey));
+        }
       });
     }
 
@@ -48,7 +45,7 @@ export default function makeManifest(config?: { getCacheInvalidationKey?: () => 
       this.addWatchFile(manifestFile);
     },
     async writeBundle() {
-      const invalidationKey = config.getCacheInvalidationKey?.();
+      const invalidationKey = config?.getCacheInvalidationKey?.();
       const manifest = await getManifestWithCacheBurst();
       makeManifest(manifest.default, distDir, invalidationKey);
     },

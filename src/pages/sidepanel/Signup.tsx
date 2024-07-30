@@ -19,7 +19,7 @@ interface SignupResponse {
 }
 
 const signup = async (userData: SignupData): Promise<SignupResponse> => {
-  const response = await axios.post('http://localhost/api/v1/accounts/signup', userData);
+  const response = await axios.post('https://fakenew.site/api/v1/accounts/signup', userData);
   return response.data;
 };
 
