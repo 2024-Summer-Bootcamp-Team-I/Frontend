@@ -24,7 +24,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     const articleUrl = window.location.href; // 현재 페이지의 URL을 articleUrl 변수에 저장
     console.log('Article URL:', articleUrl);
     // 서버에 POST 요청
-    fetch('https://localhost/api/v1/news/timeline', {
+    fetch('http://localhost/api/v1/news/timeline', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -15,7 +15,7 @@ const ScrapBoard: React.FC<ScrapBoardProps> = ({ item, onDelete }) => {
   const handleDelete = async () => {
     try {
       console.log('Attempting to delete news:', item.newsId, 'for user:', item.userId);
-      const response = await axios.delete(`https://localhost/api/v1/scraps/${item.newsId}/`, {
+      const response = await axios.delete(`http://localhost/api/v1/scraps/${item.newsId}/`, {
         params: { user_id: item.userId },
       });
       if (response.status === 204) {

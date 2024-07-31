@@ -31,7 +31,7 @@ const fetchScrapItems = async () => {
 const postScrapItem = async (item: DragItem) => {
   const userId = localStorage.getItem('user_id');
   const response = await axios.post(
-    'https://localhost/api/v1/scraps/',
+    'http://localhost/api/v1/scraps/',
     { url: item.url },
     { params: { user_id: userId } }, // 적절한 user_id로 변경
   );
