@@ -143,7 +143,7 @@ const Scrap: React.FC = () => {
   if (isError) return <p>Error: {error.message}</p>;
 
   return (
-    <div className="justify-center w-[30rem] h-[100vh]">
+    <div className="justify-center w-[30rem] h-[100vh] mb-10">
       <div className="flex h-[7.25rem] items-center justify-start">
         <img src={logo} alt="Logo" onClick={handleButtonClick} className="h-[3rem] mx-8 cursor-pointer" />
       </div>

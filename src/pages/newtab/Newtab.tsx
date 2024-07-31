@@ -20,7 +20,8 @@ const App: React.FC = () => {
 
   const longWallpaper = () => {
     setWallpaper(bgOnBoarding);
-    divElement.current.className = 'flex flex-col justify-center w-screen h-full bg-local bg-no-repeat bg-cover';
+    divElement.current.className =
+      'flex flex-col justify-center w-full h-full overflow-x-hidden bg-local bg-no-repeat bg-cover';
   };
 
   const shortWallpaper = () => {

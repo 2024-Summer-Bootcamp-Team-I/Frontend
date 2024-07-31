@@ -44,7 +44,7 @@ const SidePanel: React.FC = () => {
   return (
     <Router>
       <div
-        className="flex justify-center w-screen h-screen bg-bottom bg-no-repeat bg-cover"
+        className="flex justify-center w-screen h-screen overflow-x-hidden bg-bottom bg-no-repeat bg-cover"
         style={{
           backgroundImage: `url(${bgSidePanel})`,
         }}

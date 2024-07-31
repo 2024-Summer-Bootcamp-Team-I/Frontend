@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import exBackground from '@src/assets/img/Ex_verified.png';
-import Ex_Extension_Scrap from '@src/assets/img/Ex_extension_scrappng.png';
-import Ex_Extension_TimeLine from '@src/assets/img/Ex_Timeline.svg';
-import Ex_article from '@src/assets/img/Ex_article.png';
+import EX_scrap from '@assets/img/EX_scrap.png';
+import EX_timeline from '@assets/img/EX_timeline.png';
+import EX_mynews from '@assets/img/EX_mynews.png';
+import EX_relatednews from '@assets/img/EX_relatednews.png';
+import EX_maintexta from '@assets/img/EX_maintexta.png';
+import EX_maintextc from '@assets/img/EX_maintextc.png';
 
 import dashLineForSummary from '@src/assets/img/dashLineForSummary.svg';
 import dashLineForScore from '@assets/img/dashLineForScore.svg';
@@ -109,7 +111,7 @@ const OnBorading = ({ setNavbarBlur }) => {
   }, [setNavbarBlur]);
 
   return (
-    <div className="flex flex-col items-center justify-center h-full">
+    <div className="flex flex-col items-center justify-center h-full ">
       <div className="flex flex-col items-center justify-center my-[17.5rem]">
         <p
           className={`text-[4rem] text-white font-extrabold transition duration-[1500ms] ${animateText ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
@@ -135,7 +137,7 @@ const OnBorading = ({ setNavbarBlur }) => {
       {/* 1. 확장프로그램 소개 윈도우 */}
       <div
         ref={divRef}
-        className={`flex flex-col items-center w-[66.5rem] h-[76.5rem] relative mt-10 py-10 transition delay-50 duration-1000 ${animateDiv ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+        className={`flex flex-col items-center w-[66.5rem] h-[76.5rem] relative mt-10 py-8 transition delay-50 duration-1000 ${animateDiv ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
       >
         {/* 윈도우 창 */}
         <div className="w-[66.5rem] h-[71rem]">
@@ -167,11 +169,11 @@ const OnBorading = ({ setNavbarBlur }) => {
                 >
                   # 스크랩
                 </p>
-                <div className="flex flex-col items-center justify-center h-full mt-6">
-                  <img src={Ex_Extension_Scrap} className="rounded-b-3xl h-[37.5rem]" />
+                <div className="flex flex-col items-center justify-center h-full">
+                  <img src={EX_scrap} className="shadow-md rounded-b-3xl" />
                 </div>
                 <div
-                  className={`absolute bottom-0 left-0 right-0 flex flex-col text-white text-[1.5rem] font-bold justify-center items-center transition-opacity duration-700 ${activeIndex === 0 ? 'opacity-100' : 'opacity-0'}`}
+                  className={`absolute bottom-10 left-0 right-0 flex flex-col text-white text-[1.5rem] font-bold justify-center items-center transition-opacity duration-700 ${activeIndex === 0 ? 'opacity-100' : 'opacity-0'}`}
                 >
                   <p>네이버 뉴스에서 읽고 있는 기사를</p>
                   <p> 드래그 앤 드롭으로 바로 스크랩!</p>
@@ -183,12 +185,12 @@ const OnBorading = ({ setNavbarBlur }) => {
                 >
                   # 타임라인
                 </p>
-                <div className="flex flex-col items-center justify-center h-full mt-6">
+                <div className="flex flex-col items-center justify-center h-full">
                   {/* TimeLine이미지로 변경 */}
-                  <img src={Ex_Extension_Scrap} className=" rounded-b-3xl h-[37.5rem]" />
+                  <img src={EX_timeline} className="shadow-md rounded-b-3xl" />
                 </div>
                 <div
-                  className={`absolute bottom-0 left-0 right-0 flex flex-col text-white text-[1.5rem] font-bold justify-center items-center transition-opacity duration-700 ${activeIndex === 1 ? 'opacity-100' : 'opacity-0'}`}
+                  className={`absolute bottom-10 left-0 right-0 flex flex-col text-white text-[1.5rem] font-bold justify-center items-center transition-opacity duration-700 ${activeIndex === 1 ? 'opacity-100' : 'opacity-0'}`}
                 >
                   <p>읽고 있는 기사의 관련 이슈 타임라인을 </p>
                   <p>한 눈에 확인하세요!</p>
@@ -204,14 +206,13 @@ const OnBorading = ({ setNavbarBlur }) => {
               </div>
             </div>
             {/* 원래 bg-white있었음 */}
-            <div className="absolute top-[12.25rem] w-[66.5rem] h-[37.5rem]  rounded-b-3xl shadow-md"></div>
           </div>
         </div>
       </div>
       {/* 2. 뉴 탭 기능 소개 윈도우 */}
       <div
         ref={secondDivRef}
-        className={`flex flex-col items-center w-[66.5rem] h-[76.5rem] relative mt-10 py-10 transition delay-50 duration-1000 ${animateSecondDiv ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+        className={`flex flex-col items-center w-[66.5rem] h-[76.5rem] relative mt-10 py-8 transition delay-50 duration-1000 ${animateSecondDiv ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
       >
         {/* 윈도우 창 */}
         <div className="w-[66.5rem] h-[71rem]">
@@ -231,14 +232,14 @@ const OnBorading = ({ setNavbarBlur }) => {
                   # 판별된 기사
                 </p>
                 {/* 156px내리기 */}
-                <div className="mt-[9.75rem]">
-                  <img src={exBackground} className="rounded-b-3xl" />
+                <div className="mt-[10.25rem]">
+                  <img src={EX_relatednews} className="shadow-md rounded-b-3xl" />
                 </div>
                 <div
-                  className={`absolute bottom-0 left-0 right-0 flex flex-col text-white text-[2rem] font-bold justify-center items-center transition-opacity duration-700 ${secondActiveIndex === 0 ? 'opacity-100' : 'opacity-0'}`}
+                  className={`absolute bottom-10 left-0 right-0 flex flex-col text-white text-[2rem] font-bold justify-center items-center transition-opacity duration-700 ${secondActiveIndex === 0 ? 'opacity-100' : 'opacity-0'}`}
                 >
                   <div className="flex items-end pr-8 mr-12">
-                    <img src={dashLineForScore} className="mb-5 mr-4" />
+                    <img src={dashLineForScore} className="mb-5 mr-[3rem]" />
                     <p># 신뢰도 판별 점수 </p>
                   </div>
                   <p className="text-[1.5rem]">SNU 팩트체크 판별 결과에 기반한 </p>
@@ -251,11 +252,11 @@ const OnBorading = ({ setNavbarBlur }) => {
                 >
                   # 스크랩한 기사
                 </p>
-                <div className="mt-[9.75rem]">
-                  <img src={exBackground} className="rounded-b-3xl" />
+                <div className="mt-[10.25rem]">
+                  <img src={EX_mynews} className="shadow-md rounded-b-3xl" />
                 </div>
                 <div
-                  className={`absolute bottom-10 left-0 right-0 flex flex-col text-white text-[1.5rem] font-bold justify-center items-center  transition-opacity duration-700 ${secondActiveIndex === 1 ? 'opacity-100' : 'opacity-0'}`}
+                  className={`absolute bottom-20 left-0 right-0 flex flex-col text-white text-[1.5rem] font-bold justify-center items-center  transition-opacity duration-700 ${secondActiveIndex === 1 ? 'opacity-100' : 'opacity-0'}`}
                 >
                   <p>확장 프로그램에서 스크랩한 기사만</p>
                   <p>모아서 볼 수 있어요!</p>
@@ -271,11 +272,11 @@ const OnBorading = ({ setNavbarBlur }) => {
                 >
                   # 뉴스 요약
                 </p>
-                <div className="mt-[9.75rem]">
-                  <img src={Ex_article} className="rounded-b-3xl" />
+                <div className="mt-[10.25rem]">
+                  <img src={EX_maintexta} className="shadow-md rounded-b-3xl" />
                 </div>
                 <div
-                  className={`absolute bottom-10 left-0 right-0 flex flex-col justify-center items-center text-white text-[2rem] font-bold transition-opacity duration-700 ${secondActiveIndex === 2 ? 'opacity-100' : 'opacity-0'}`}
+                  className={`absolute bottom-20 left-0 right-0 flex flex-col justify-center items-center text-white text-[2rem] font-bold transition-opacity duration-700 ${secondActiveIndex === 2 ? 'opacity-100' : 'opacity-0'}`}
                 >
                   <p className="pb-1"># 관련/반대 기사</p>
                   <p className="text-[1.5rem]">빠르게 관련 기사 링크로 이동할 수 있어요</p>
@@ -287,11 +288,11 @@ const OnBorading = ({ setNavbarBlur }) => {
                 >
                   # 신뢰도 판별 점수
                 </p>
-                <div className="mt-[9.75rem]">
-                  <img src={Ex_article} className="rounded-b-3xl" />
+                <div className="mt-[10.25rem]">
+                  <img src={EX_maintextc} className="shadow-md rounded-b-3xl " />
                 </div>
                 <div
-                  className={`absolute bottom-0 left-0 right-0 flex flex-col text-white text-[1.5rem] font-bold justify-center items-center transition-opacity duration-700 ${secondActiveIndex === 3 ? 'opacity-100' : 'opacity-0'}`}
+                  className={`absolute bottom-10 left-0 right-0 flex flex-col text-white text-[1.5rem] font-bold justify-center items-center transition-opacity duration-700 ${secondActiveIndex === 3 ? 'opacity-100' : 'opacity-0'}`}
                 >
                   <p>이 기사, 믿어도 될까? </p>
                   <p>뉴스 인사이드에서는 믿어도 됩니다.</p>
@@ -308,7 +309,6 @@ const OnBorading = ({ setNavbarBlur }) => {
               </div>
             </div>
             {/* 원래 bg-white있었음 */}
-            <div className="absolute top-[12.25rem] w-[66.5rem] h-[37.5rem]  rounded-b-3xl shadow-md"></div>
           </div>
         </div>
       </div>
@@ -321,8 +321,16 @@ const OnBorading = ({ setNavbarBlur }) => {
       </div>
       {/* 맨 아래 아이콘 */}
       <div className="flex justify-between mb-[2rem] w-screen pl-8 pr-14">
-        <img src={githubIcon} />
-        <p className="text-[1rem] text-white font-bold translate-y-2">개인정보처리방침</p>
+        <a href="https://github.com/2024-Summer-Bootcamp-Team-I" target="_blank" rel="noopener noreferrer">
+          <img src={githubIcon} alt="GitHub" className="w-8 h-8" />
+        </a>
+        <a
+          href="https://cut-pyjama-3c1.notion.site/News-Inside_-6300d5d15f584f2aa4a1cc48c5c597df"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <p className="text-[1rem] text-white font-bold translate-y-2">개인정보처리방침</p>
+        </a>
       </div>
     </div>
   );
