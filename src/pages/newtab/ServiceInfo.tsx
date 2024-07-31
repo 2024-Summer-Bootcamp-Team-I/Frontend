@@ -11,7 +11,7 @@ interface DataItem {
 }
 
 const getNewsCountAPI = async () => {
-  const response = await axios.get('https://fakenew.site/api/v1/news/count/classify');
+  const response = await axios.get('http://localhost/api/v1/news/count/classify');
   return response.data;
 };
 

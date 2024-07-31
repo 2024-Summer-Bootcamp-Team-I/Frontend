@@ -18,7 +18,7 @@ interface LoginResponse {
 }
 
 const login = async ({ email, password }: LoginProps): Promise<LoginResponse> => {
-  const response = await axios.post('https://fakenew.site/api/v1/accounts/login', { email, password });
+  const response = await axios.post('http://localhost/api/v1/accounts/login', { email, password });
   console.log('Login response:', response.data);
   return response.data;
 };
