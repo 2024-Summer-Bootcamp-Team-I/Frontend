@@ -13,7 +13,7 @@ import loadingAnimation from '@src/assets/img/loading004.json';
 
 const fetchScrapItems = async () => {
   const userId = localStorage.getItem('user_id');
-  const response = await axios.get('https://localhost/api/v1/scraps/', {
+  const response = await axios.get('http://localhost/api/v1/scraps/', {
     params: { user_id: userId },
   });
   console.log('userId:', userId); // user_id 확인
