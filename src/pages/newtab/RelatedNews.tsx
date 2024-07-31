@@ -10,7 +10,7 @@ import SearchBar from '@root/src/components/SearchBar';
 const itemsPerPage = 9; // 페이지당 항목의 개수를 9로 설정
 
 const fetchRelatedNews = async (page, query) => {
-  const response = await axios.get(`https://fakenew.site/api/v1/classifies/`, {
+  const response = await axios.get(`https://localhost/api/v1/classifies/`, {
     params: { page, keyword: query },
   });
   console.log(response.data);

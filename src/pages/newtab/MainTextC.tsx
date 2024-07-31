@@ -11,7 +11,7 @@ import loadingAnimation from '@src/assets/img/loading004.json';
 import { formatDate } from '@root/utils/formatDate';
 
 const fetchNewsData = async (newsId: string) => {
-  const response = await axios.get(`https://fakenew.site/api/v1/classifies/C/${newsId}`);
+  const response = await axios.get(`https://localhost/api/v1/classifies/C/${newsId}`);
   console.log('Response:', response);
   const news = response.data.news;
   const score = response.data.score;
