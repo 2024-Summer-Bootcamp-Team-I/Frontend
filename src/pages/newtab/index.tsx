@@ -18,7 +18,9 @@ function init() {
 
   root.render(
     <QueryClientProvider client={queryClient}>
-      <Newtab />
+      <div className="font-pretendardFont">
+        <Newtab />
+      </div>
       <ReactQueryDevtools initialIsOpen={true} />
     </QueryClientProvider>,
   );

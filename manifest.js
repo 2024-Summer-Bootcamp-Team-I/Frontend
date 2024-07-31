@@ -21,11 +21,11 @@ const manifest = {
   },
 
   permissions: ['storage', 'sidePanel', 'tabs'],
-  host_permissions: ['https://news.naver.com/section/*', 'https://n.news.naver.com/mnews/article/*'],
+  host_permissions: ['https://news.naver.com/section/102', 'https://n.news.naver.com/mnews/article/*'],
 
   side_panel: {
     default_path: 'src/pages/sidepanel/index.html',
-    matches: ['https://news.naver.com/section/*', 'https://n.news.naver.com/mnews/article/*'],
+    matches: ['https://news.naver.com/section/102', 'https://n.news.naver.com/mnews/article/*'],
   },
   options_page: 'src/pages/options/index.html',
 
@@ -34,7 +34,7 @@ const manifest = {
   },
   content_scripts: [
     {
-      matches: ['https://news.naver.com/section/*', 'https://n.news.naver.com/mnews/article/*'],
+      matches: ['https://news.naver.com/section/102', 'https://n.news.naver.com/mnews/article/*'],
       js: ['src/pages/content/index.js'],
       type: 'module',
     },

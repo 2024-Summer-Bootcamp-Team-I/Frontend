@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import logo from '@root/src/assets/img/Logo.svg';
 import TimelineIcon from '@src/assets/img/TimelineIcon.svg';
 import line from '@src/assets/img/Line1.svg';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 
 interface ArticleData {
   title: string;
@@ -55,7 +56,7 @@ const Timeline: React.FC = () => {
           date,
           articles: groupedData[date],
         }));
-
+        console.log(formattedData);
         setTimelineData(formattedData);
       }
     });
@@ -68,7 +69,7 @@ const Timeline: React.FC = () => {
 
   // 로고 및 타임라인
   return (
-    <div className="justify-center w-[30rem] h-[100vh] overflow-hidden">
+    <div className="justify-center w-[30rem] h-[100vh] overflow-hidden flex flex-col">
       <div className="flex h-[7.25rem] items-center justify-start">
         <img src={logo} alt="Logo" onClick={handleButtonClick} className="h-[3rem] mx-8 cursor-pointer" />
       </div>
@@ -84,32 +85,34 @@ const Timeline: React.FC = () => {
           타임라인입니다.
         </p>
       </div>
-      <div className="px-8 pt-[1.25rem] pb-[0.75rem]">
+      <div className="px-8 pt-[1.25rem] pb-8">
         <img src={line} alt="Line" />
       </div>
-      {timelineData.map((item, index) => (
-        <div key={index} className="ml-[2rem] mt-[1.75rem] relative flex items-start w-full">
-          {/* 흰색 세로선 */}
-          <div className="absolute left-[0.625rem] rounded-full top-0 w-[0.175rem] h-[101%] bg-white z-0"></div>
-          {/* 파란색 원 */}
-          <div className="relative flex items-center justify-center w-[1.5rem] h-[1.5rem] mt-8 bg-blue-500 rounded-full border-2 border-white z-10">
-            <span className="justify-center items-center absolute text-lg text-white left-[2rem] flex font-semibold whitespace-nowrap">
-              {item.date}
-            </span>
+      <PerfectScrollbar className="flex-grow mb-8 ml-8 overflow-y-auto">
+        {timelineData.map((item, index) => (
+          <div key={index} className="relative flex items-start w-full">
+            {/* 흰색 세로선 */}
+            <div className="absolute left-[0.625rem] top-0 w-[0.175rem] h-[100%] bg-white z-0"></div>
+            {/* 파란색 원 */}
+            <div className="relative flex items-center justify-center w-[1.5rem] h-[1.5rem] mt-8 bg-blue-500 rounded-full border-2 border-white z-10">
+              <span className="justify-center items-center absolute text-lg text-white left-[2rem] flex font-semibold whitespace-nowrap">
+                {item.date}
+              </span>
+            </div>
+            <div className="mt-[3rem] ml-[1.25rem] w-[75%] text-base text-md text-white">
+              <ul className="list-disc mt-[1rem]">
+                {item.articles.map((article, articleIndex) => (
+                  <li key={articleIndex} className="mt-2">
+                    <a href={article.url} target="_blank" rel="noopener noreferrer">
+                      {article.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-          <div className="mt-[3rem] ml-[1.25rem] w-[80%] text-base text-md text-white">
-            <ul className="list-disc mt-[1rem]">
-              {item.articles.map((article, articleIndex) => (
-                <li key={articleIndex} className="mt-2">
-                  <a href={article.url} target="_blank" rel="noopener noreferrer">
-                    {article.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      ))}
+        ))}
+      </PerfectScrollbar>
     </div>
   );
 };

@@ -72,8 +72,8 @@ const Navbar = ({ long, short, isBlurActive }) => {
             </button>
           </Link>
         </div>
+
       </div>
-      <SearchBar />
     </div>
   );
 };

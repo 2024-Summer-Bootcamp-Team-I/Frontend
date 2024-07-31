@@ -11,7 +11,7 @@ interface DataItem {
 }
 
 const getNewsCountAPI = async () => {
-  const response = await axios.get('http://localhost/api/v1/news/count');
+  const response = await axios.get('https://fakenew.site/api/v1/news/count/classify');
   return response.data;
 };
 
@@ -49,17 +49,6 @@ const ServiceInfo: React.FC = () => {
     const errorMessage = (error as Error).message;
     return <div>Error: {errorMessage}</div>;
   }
-
-  // // 기존 방식
-  // const newscount = async () => {
-  //   try {
-  //     const response = await axios.get<DataItem[]>('http://localhost:8000/api/v1/newscount');
-  //     setData(response.data);
-  //     addItem(response.data);
-  //   } catch (error) {
-  //     console.log(error, 'error');
-  //   }
-  // };
 
   const addItem = (data) => {
     // if (data.length>0) //이게실행이안되었엇음

@@ -13,7 +13,7 @@ import loadingAnimation from '@src/assets/img/loading004.json';
 
 const fetchScrapItems = async () => {
   const userId = localStorage.getItem('user_id');
-  const response = await axios.get('http://localhost/api/v1/scraps/', {
+  const response = await axios.get('https://fakenew.site/api/v1/scraps/', {
     params: { user_id: userId },
   });
   console.log('userId:', userId); // user_id 확인
@@ -31,7 +31,7 @@ const fetchScrapItems = async () => {
 const postScrapItem = async (item: DragItem) => {
   const userId = localStorage.getItem('user_id');
   const response = await axios.post(
-    'http://localhost/api/v1/scraps/',
+    'https://fakenew.site/api/v1/scraps/',
     { url: item.url },
     { params: { user_id: userId } }, // 적절한 user_id로 변경
   );
@@ -65,6 +65,7 @@ const Scrap: React.FC = () => {
     isError,
     error,
   } = useQuery<ScrapItem[], Error>({ queryKey: ['scrapItems'], queryFn: fetchScrapItems });
+
   const mutation = useMutation<
     { userId: number; newsId: any; title: any; img: any; publishedDate: any; channelName: any; type: any },
     Error,
@@ -149,7 +150,7 @@ const Scrap: React.FC = () => {
       <div className="text-midnight">
         <div className="px-[2rem] flex items-center">
           <img src={ScrapIcon} alt="Scrap Icon" />
-          <p className="ml-1 font-extrabold text-[1.5rem]">스크랩</p>
+          <p className="font-pretendardFontBold ml-1 font-extrabold text-[1.5rem]">스크랩</p>
         </div>
 
         <p className="px-[2rem] py-[0.75rem] text-[1.25rem]">
@@ -162,7 +163,7 @@ const Scrap: React.FC = () => {
       </div>
       <div className="m-0">
         <div className="flex justify-center items-center w-[26rem] h-[7.5rem] mx-[2rem] my-[1.25rem] border-dashed border-2 border-midnight rounded-[1.25rem]">
-          <p className="text-[1.5rem] font-semibold text-midnight">DROP</p>
+          <p className=" text-[1.5rem] font-semibold text-midnight">DROP</p>
         </div>
         <div className="overflow-hidden" style={{ height: scrollHeight }}>
           <PerfectScrollbar className="w-full h-full">
